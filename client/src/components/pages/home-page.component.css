@@ -1,0 +1,61 @@
+
+.overview p:nth-child(1) {
+    font-weight: 700;
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+    padding-top: 1.5rem;
+    padding-bottom: .5rem;
+    margin: 0;
+}
+
+.overview p:nth-child(2) {
+    font-size: 1.1rem;
+    line-height: 1.5rem;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+}
+
+.social {
+    display: flex;  
+}
+
+.social-button {
+    padding: 1px;
+    background-color: #e7e5e480;
+    border-radius: .75rem;
+    width: 6rem;
+    height: 2.5rem;
+    margin-right: .75rem;
+    --tw-shadow: inset 0 0 0 1px rgba(255,255,255,.4);
+    --tw-shadow-colored: inset 0 0 0 1px var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.social-button:hover {
+    --tw-gradient-from: #7c2d12 var(--tw-gradient-from-position);
+    --tw-gradient-to: rgb(124 45 18 / 0) var(--tw-gradient-to-position);
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+    --tw-shadow: inset 0 0 0 1px rgba(255,255,255,.4);
+    --tw-shadow-colored: inset 0 0 0 1px var(--tw-shadow-color);
+    background-image: linear-gradient(to right, var(--tw-gradient-stops));
+    
+}
+
+.social-button a {
+    opacity: 0.9;
+    color: inherit;
+    padding: 1rem;
+    background-color: var(--button-background-color);
+    border-radius: .7rem;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    text-decoration: inherit;
+}
+
+.about-text {
+    text-decoration: inherit;
+    color: var(--link-color);
+}
