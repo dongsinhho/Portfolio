@@ -1,0 +1,52 @@
+.personal-info {
+    text-align: center;
+}
+
+.personal-info h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.personal-info p {
+    font-size: 1.2em;
+}
+
+.bio {
+    margin-top: 40px;
+}
+
+.bio h2 {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.bio p {
+    font-size: 1.1em;
+    line-height: 1.6;
+}
+
+.skills {
+    margin-top: 40px;
+}
+
+.skills h2 {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.skills ul {
+    list-style-type: none;
+    padding: 0;
+    
+}
+
+.skills li {
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 1.1em;
+    background-color: var(--button-background-color);
+    --tw-shadow: inset 0 0 0 1px rgba(255,255,255,.4);
+    --tw-shadow-colored: inset 0 0 0 1px var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
