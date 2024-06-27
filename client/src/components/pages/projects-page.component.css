@@ -1,0 +1,27 @@
+.project-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.project-item {
+    padding: 20px;
+    border-radius: 8px;
+    background-color: var(--button-background-color);
+    --tw-shadow: inset 0 0 0 1px rgba(255,255,255,.4);
+    --tw-shadow-colored: inset 0 0 0 1px var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.project-item h3 {
+    margin-top: 0;
+}
+
+.project-item a {
+    color: var(--link-color);
+    text-decoration: none;
+}
+
+.project-item a:hover {
+    text-decoration: underline;
+}
