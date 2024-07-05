@@ -1,0 +1,11 @@
+.card-section {
+    padding-bottom: 1rem;
+    flex-direction: column;
+    display: flex;
+}
+
+@media (min-width: 768px) {
+    .card-section {
+        flex-direction: row;
+    }
+}
