@@ -1,6 +1,11 @@
 import { Link } from 'react-router-dom';
+
 import './home-page.component.css';
 import routes from '../../utils/routes';
+import LinkRef from '../atoms/link-ref';
+import CardSection from '../organisms/card.section';
+
+import blogs_data from '../../mock-data/blog-data';
 
 function Homepage() {
     return (
@@ -22,7 +27,7 @@ function Homepage() {
                     <div className='social-button'>
                         {/* TODO: Change this to SVG */}
                         <a href='https://github.com/dongsinhho' target='_blank' rel="noreferrer">
-                            GitHub 
+                            GitHub
                         </a>
                     </div>
                     <div className='social-button'>
@@ -36,6 +41,15 @@ function Homepage() {
                         </a>
                     </div>
                 </div>
+            </div>
+            <div className='post-section'>
+                {/* <Tag name="test" link="/about" />
+                <LinkRef text="wwww.hasda/.ádkasmd" link="https://facebook.com" /> */}
+                <div className='post-section-title'>
+                    <p>Latest Posts</p>
+                    <LinkRef text='all posts →' link='/blog' referrer/>
+                </div>
+                <CardSection blogData={blogs_data}/>
             </div>
         </div>
     );

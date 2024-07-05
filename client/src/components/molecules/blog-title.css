@@ -1,0 +1,27 @@
+.blog-title {
+    align-items: center;
+    flex-direction: column;
+    display: flex;
+    margin-bottom: 3rem;
+}
+
+.blog-title-name {
+    font-weight: 700;
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+    text-align: center;
+    padding-top: 1.5rem;
+    padding-bottom: 1rem;
+    padding-left: 3.5rem;
+    padding-right: 3.5rem;
+}
+
+.blog-list-tag {
+    padding-bottom: 1rem;
+}
+
+.blog-title-time {
+    display: flex;
+    font-size: .875rem;
+    line-height: 1.25rem;
+}
