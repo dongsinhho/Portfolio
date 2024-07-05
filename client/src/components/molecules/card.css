@@ -1,78 +1,73 @@
-
-.overview p:nth-child(1) {
-    font-weight: 700;
-    font-size: 2.25rem;
-    line-height: 2.5rem;
-    padding-top: 1.5rem;
-    padding-bottom: .5rem;
-    margin: 0;
-}
-
-.overview p:nth-child(2) {
-    font-size: 1.1rem;
-    line-height: 1.5rem;
-    padding-top: .5rem;
-    padding-bottom: .5rem;
-}
-
-.social {
-    display: flex;  
-}
-
-.social-button {
+.card {
+    flex-basis: .25rem;
+    font-size: .875rem;
+    line-height: 1.25rem;
     padding: 1px;
     background-color: #e7e5e480;
-    border-radius: .75rem;
-    width: 6rem;
-    height: 2.5rem;
-    margin-right: .75rem;
+    border-radius: 1rem;
     --tw-shadow: inset 0 0 0 1px rgba(255,255,255,.4);
     --tw-shadow-colored: inset 0 0 0 1px var(--tw-shadow-color);
     box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
-.social-button:hover {
+@media (min-width: 768px) {
+    .card {
+        flex-basis: 33.333333%;
+        margin-right: 1rem;
+    }
+    .card:last-child {
+        margin-right: 0;
+    }
+}
+
+.card:hover {
     --tw-gradient-from: #7c2d12 var(--tw-gradient-from-position);
     --tw-gradient-to: rgb(124 45 18 / 0) var(--tw-gradient-to-position);
     --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
     --tw-shadow: inset 0 0 0 1px rgba(255,255,255,.4);
     --tw-shadow-colored: inset 0 0 0 1px var(--tw-shadow-color);
     background-image: linear-gradient(to right, var(--tw-gradient-stops));
-    
 }
 
-.social-button a {
+.card-content {
     opacity: 0.9;
-    color: inherit;
     padding: 1rem;
     background-color: var(--button-background-color);
-    border-radius: .7rem;
-    justify-content: center;
-    align-items: center;
+    border-radius: 1rem;
+    flex-direction: column;
     width: 100%;
     height: 100%;
     display: flex;
-    text-decoration: inherit;
 }
 
-.about-text {
-    text-decoration: inherit;
-    color: var(--link-color);
+.card-content div:first-child {
+    flex: 1 1 auto;
 }
 
-.post-section {
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
+.card-content a {
+    padding-top: 1rem;
 }
 
-.post-section-title {
+.card-time {
+    font-size: .75rem;
+    line-height: 1rem;
     padding-bottom: 1rem;
     justify-content: space-between;
     display: flex;
 }
 
-.post-section-title p {
+.card-title {
     font-weight: 700;
-    font-size: 1.25rem;
+    font-size: 1.125rem;
     line-height: 1.75rem;
+    padding-bottom: 1rem;
 }
+
+.card-description {
+    padding-top: 1rem;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 6;
+}
+
