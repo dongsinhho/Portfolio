@@ -7,6 +7,7 @@
   border-color: #e5e7eb;
 
   --link-color: rgb(234 88 12);
+  --tag-background-color: rgb(87 83 78);
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
   --tw-translate-x: 0;
@@ -64,7 +65,7 @@
   --text-color: rgb(3 7 18);
   --light-switch: block;
   --dark-switch: none;
-  --button-background-color: rgb(214 211 209);
+  --button-background-color: rgb(214 211 209); 
 }
 
 [data-theme="dark"] {
@@ -114,8 +115,13 @@ body {
 
 .page-title {
   text-align: center;
+  padding-bottom: 1rem;
 }
 
 .page-title h1 {
     font-size: 2.5em;
+}
+
+blockquote, dl, dd, h1, h2, h3, h4, h5, h6, hr, figure, p, pre {
+  margin: 0;
 }
