@@ -1,0 +1,25 @@
+.scroll-top {
+    cursor: pointer;
+    outline-offset: 1px;
+    outline-width: 2px;
+    outline-color: rgb(var(--color-accent));
+    white-space: nowrap;
+    padding-top: .25rem;
+    padding-bottom: .25rem;
+    background-color: #0000;
+    background-image: none;
+    text-transform: none;
+    font-family: inherit;
+}
+
+.scroll-top svg{
+    fill: rgb(var(--color-text-base));
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-right: 0.5rem;
+    display: inline-block;
+    vertical-align: middle;
+    --tw-rotate: 90deg;
+    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skew(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
