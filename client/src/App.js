@@ -41,3 +41,6 @@ export default App;
 // Blog-project Data
 // Search page
 // Go back
+// Add slide image in About Me
+
+// Get Reading time from reading-time
