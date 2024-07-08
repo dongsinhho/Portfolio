@@ -94,11 +94,10 @@ body {
   background-color: var(--background-color);
   color: var(--text-color);
   line-height: inherit;
-
   transition: 500ms ease-in-out;
-
 }
-                           
+
+
 .container {
   flex-grow: 1;
   flex-shrink: 1;
