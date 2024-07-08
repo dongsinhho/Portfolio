@@ -10,9 +10,16 @@
     width: 100%;
     margin-left: auto;
     margin-right: auto;
+    font-size: .875rem;
 }
 
 .blog-content {
     align-items: center;
     justify-content: center;
+}
+
+.blog-footer {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: space-between;
 }
