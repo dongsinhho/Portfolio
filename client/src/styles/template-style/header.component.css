@@ -65,6 +65,10 @@ header {
     text-decoration: inherit;
 }
 
+.nav-links a:hover {
+    color: var(--link-color);
+}
+
 .theme {
     justify-content: center;
     flex-direction: column;

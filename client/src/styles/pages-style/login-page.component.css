@@ -1,0 +1,66 @@
+.login-content {
+    align-items: center;
+    justify-content: center;
+}
+
+.inputContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttonContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 260px;
+}
+
+.inputContainer>.errorLabel {
+    margin-top: 0.7rem;
+    color: var(--link-color);
+}
+
+.inputBox {
+    height: 48px;
+    width: 400px;
+    border-radius: .75rem;
+    border-bottom: 1px solid grey;
+    padding-left: 8px;
+}
+
+.inputButton {
+    padding: 1px;
+    background-color: #e7e5e480;
+    border-radius: .75rem;
+    width: 400px;
+    height: 2.5rem;
+    --tw-shadow: inset 0 0 0 1px rgba(255,255,255,.4);
+    --tw-shadow-colored: inset 0 0 0 1px var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.inputButton div {
+    opacity: 0.9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    border-radius: .7rem;
+    color: inherit;
+    background-color: var(--button-background-color);
+}
+
+.inputButton svg {
+    padding: 0.5rem;
+    color: var(--text-color);
+    width: 2rem;
+    height: 2rem;
+}
+
+.inputButton p {
+    color: var(--text-color);
+}

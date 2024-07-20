@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Tag from '../atoms/tag'
 import LinkRef from '../atoms/link-ref'
-import './card.css'
+import '../../styles/molecules-style/card.css'
 
 const Card = props => {
   const {blog} = props

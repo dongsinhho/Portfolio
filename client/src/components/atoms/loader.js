@@ -1,4 +1,4 @@
-import './loader.css';
+import '../../styles/atoms-style/loader.css';
 
 const Loader = () => {
   return (
