@@ -19,9 +19,10 @@ const About = () => {
                     <li>Node.js</li>
                     <li>Python</li>
                     <li>C#</li>
-                    <li>TCP/IP</li>
+                    <li>Networking</li>
                     <li>Windows Application</li>
-                    <li>Git & GitHub</li>
+                    <li>Operating System</li>
+                    <li>CI/CD & Docker Container </li>
                 </ul>
             </div>
 
