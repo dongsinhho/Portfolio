@@ -1,5 +1,20 @@
 const blogs_data = [
     {
+        id: 0,
+        title: 'My first blog',
+        description: 'This is my first blog',
+        link: 'http://example.com/blog-one',
+        post_date: new Date(),
+        tags: [
+            {
+                name: 'Uncategorized',
+                link: '/blog'
+            }
+        ],
+        time_to_read: 300,
+        content: "<p>Hi guys!</p><p>&nbsp;</p><p>I intended to have my own blog for a long time but kept postponing it for thousand reasons, like lazy, being busy, and side projects. Since I was in school as a child, it's hard to me to take a seat and write down something but somebody once said: \"The journey of a thousand miles begins with one step\" and now I'm starting my journey to record the knowledge I've gathered.</p><p>&nbsp;</p><p>This is to inform myself and anyone who is interested that the upcoming articles will be about computers, programming, networking and <span class=\"Y2IQFc\" lang=\"en\">things that interest me</span>. I'll be sharing knowledge from the projects I've worked on at the companies, as well as personal projects that apply to real life and solve real-life problems.</p><p>&nbsp;</p><p>I hope these articles will not only serve as a valuable resource for others but also as a way for me to continuously learn and stay updated in this fast-evolving field. By documenting and sharing this journey, I aim to create a community of like-minded individuals who are passionate about technology and innovation.</p><p>&nbsp;</p><p>I consider all this knowledge and these experiences to be the luggage I'll carry with me for the next steps!!!</p>"
+    },
+    {
         id: 1,
         title: 'Tiktok Crawler',
         description: 'How I built a tiktok crawler application by C#, NodeJs',
@@ -20,8 +35,7 @@ const blogs_data = [
             }
         ],
         time_to_read: 300,
-        content: `<div><h1>test thử xem sao</h1> 
-        <h2>noi dung nay bip</h2></div>`
+        content: "<p>Hi guys!</p><p>I intended to have my own blog for a long time but kept postponing it for thousand reasons, like lazy, being busy, and side projects. Since I was in school as a child, it's hard to me to take a seat and write down something but somebody once said: \"The journey of a thousand miles begins with one step\" and now I'm starting my journey to record the knowledge I've gathered.</p><p>&nbsp;</p><p>This is to inform myself and anyone who is interested that the upcoming articles will be about computers, programming, networking and <span class=\"Y2IQFc\" lang=\"en\">things that interest me</span>. I'll be sharing knowledge from the projects I've worked on at the companies, as well as personal projects that apply to real life and solve real-life problems.</p><p>&nbsp;</p><p>I hope these articles will not only serve as a valuable resource for others but also as a way for me to continuously learn and stay updated in this fast-evolving field. By documenting and sharing this journey, I aim to create a community of like-minded individuals who are passionate about technology and innovation.</p><p>&nbsp;</p><p>I consider all this knowledge and these experiences to be the luggage I'll carry with me for the next steps!!!</p>"
     },
     {
         id: 2,
