@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import './link-ref.css'
+import '../../styles/atoms-style/link-ref.css'
 import { Link } from 'react-router-dom';
 
 const LinkRef = props => {

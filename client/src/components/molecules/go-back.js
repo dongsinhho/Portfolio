@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 
-import './go-back.css'
+import '../../styles/molecules-style/go-back.css'
 
 const GoBack = () => {
     const navigate = useNavigate();

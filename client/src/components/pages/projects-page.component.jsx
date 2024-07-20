@@ -1,4 +1,4 @@
-import './projects-page.component.css'
+import '../../styles/pages-style/projects-page.component.css'
 import projects_data from '../../mock-data/projects-data'
 
 const Projects = () => {

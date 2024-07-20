@@ -1,8 +1,5 @@
 .go-back {
     cursor: pointer;
-    outline-offset: 1px;
-    outline-width: 2px;
-    outline-color: rgb(var(--color-accent));
     white-space: nowrap;
     padding-top: .25rem;
     padding-bottom: .25rem;
@@ -10,9 +7,15 @@
     background-image: none;
     text-transform: none;
     font-family: inherit;
+    color: var(--text-color);
+}
+
+.go-back:hover {
+    color: var(--link-color);
 }
 
 .go-back svg {
+    fill: var(--text-color);
     width: 1.5rem;
     height: 1.5rem;
     margin-right: 0.5rem;
