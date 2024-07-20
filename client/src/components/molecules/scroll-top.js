@@ -1,5 +1,5 @@
 import React from 'react'
-import './scroll-top.css'
+import '../../styles/molecules-style/scroll-top.css'
 
 const ScrollTop = () => {
     const handleScrollToTop = () => {

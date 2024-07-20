@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import './card.section.css'
+import '../../styles/organisms-style/card.section.css'
 import Card from '../molecules/card'
 
 const CardSection = props => {

@@ -1,23 +1,23 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import './blog-title.css'
+import '../../styles/molecules-style/blog-title.css'
 import Tag from '../atoms/tag'
 
 const BlogTitle = props => {
     const { blog } = props
     return (
         <div className='blog-title'>
-            <p className='blog-title-name'>This is the third post of my new Astro blog.</p>
+            <p className='blog-title-name'>{blog.title}</p>
             <div className='blog-list-tag'>
-                <Tag name='tag' />
-                <Tag name='tag' />
-                <Tag name='tag' />
+                {blog.tags.map((tag, index) => (
+                    <Tag name={tag.name} referrer key={index} />
+                ))}
             </div>
             <div className='blog-title-time'>
-                <p>ádadasdsad</p>
+                <p>{blog.post_date.toLocaleString()}</p>
                 <span>&nbsp;-&nbsp;</span>
-                <p>ádadasdsad</p>
+                <p>{blog.time_to_read / 60} min read</p>
             </div>
         </div>
     )
