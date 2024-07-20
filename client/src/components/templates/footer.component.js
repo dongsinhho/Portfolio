@@ -1,4 +1,4 @@
-import './footer.component.css'
+import '../../styles/template-style/footer.component.css'
 
 const Footer = () => {
     return (
@@ -9,8 +9,8 @@ const Footer = () => {
                     <a href='http://github.com/dongsinhho' target='_blank' rel='noreferrer'>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
+                            strokeLinecap='round'
+                            strokeLinejoin='round'
                         >
                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                             <path
@@ -21,8 +21,8 @@ const Footer = () => {
                     <a href='http://facebook.com/dongsinhho' target='_blank' rel='noreferrer'>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
+                            strokeLinecap='round'
+                            strokeLinejoin='round'
                         >
                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                             <path
@@ -33,9 +33,8 @@ const Footer = () => {
                     <a href='mailto:sinhvua@gmail.com' target='_blank' rel='noreferrer'>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            class="icon-tabler"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
+                            strokeLinecap='round'
+                            strokeLinejoin='round'
                         >
                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                             <rect x="3" y="5" width="18" height="14" rx="2"></rect>
@@ -45,8 +44,8 @@ const Footer = () => {
                     <a href='https://www.linkedin.com/in/hongocdongsinh/' target='_blank' rel='noreferrer'>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
+                            strokeLinecap='round'
+                            strokeLinejoin='round'
                         >
                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                             <rect x="4" y="4" width="16" height="16" rx="2"></rect>

@@ -1,19 +1,21 @@
 .scroll-top {
     cursor: pointer;
-    outline-offset: 1px;
-    outline-width: 2px;
-    outline-color: rgb(var(--color-accent));
     white-space: nowrap;
     padding-top: .25rem;
     padding-bottom: .25rem;
     background-color: #0000;
+    color: var(--text-color);
     background-image: none;
     text-transform: none;
     font-family: inherit;
 }
 
+.scroll-top:hover {
+    color: var(--link-color);
+}
+
 .scroll-top svg{
-    fill: rgb(var(--color-text-base));
+    fill: var(--text-color);
     width: 1.5rem;
     height: 1.5rem;
     margin-right: 0.5rem;

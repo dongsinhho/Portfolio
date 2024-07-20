@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import './scroll-indicator.component.css'
+import '../../styles/template-style/scroll-indicator.component.css'
 
 const ScrollIndicator = () => {
     const [scrollTop, setScrollTop] = useState(0);

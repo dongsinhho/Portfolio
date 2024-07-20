@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-import './tag.css'
+import '../../styles/atoms-style/tag.css'
 
 const Tag = (props) => {
     const { name, link } = props;

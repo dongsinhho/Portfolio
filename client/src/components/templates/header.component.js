@@ -1,48 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
-import './header.component.css';
+import '../../styles/template-style/header.component.css';
 
 const Header = () => {
-    // const mode = () => {
-    //     if (localStorage.getItem('dark-mode') === 'true' ||
-    //         (!('dark-mode' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-    //         localStorage.setItem('dark-mode', 'true');
-    //         document.querySelector('html')?.classList.add('dark');
-    //     }
-    //     else {
-    //         localStorage.setItem('dark-mode', 'false');
-    //         document.querySelector('html')?.classList.remove('dark');
-    //     }
-        
-    //     const lightSwitches = document.querySelectorAll('.light-switch');
-    //     if (lightSwitches.length > 0) {
-    //         lightSwitches.forEach((lightSwitch, i) => {
-    //             if (localStorage.getItem('dark-mode') === 'true') {
-    //                 lightSwitch.checked = true;
-    //             }
-    //             lightSwitch.addEventListener('click', () => {
-    //                 const { checked } = lightSwitch;
-    //                 lightSwitches.forEach((el, n) => {
-    //                     if (n !== i) {
-    //                         el.checked = checked;
-    //                     }
-    //                 });
-    //                 if (lightSwitch.checked) {
-    //                     document.documentElement.classList.add('dark');
-    //                     localStorage.setItem('dark-mode', 'true');
-    //                 } else {
-    //                     document.documentElement.classList.remove('dark');
-    //                     localStorage.setItem('dark-mode', 'false');
-    //                 }
-    //             });
-    //         });
-    //     }
-    // }
+    const mode = () => {
+        if (localStorage.getItem('dark-mode') === 'true') {
+            return 'dark';
+        }
+        else {
+            return 'light';
+        }
+    }
 
-    const [theme, setTheme] = useState('light');
+    const [theme, setTheme] = useState(mode);
 
     useEffect(() => {
         document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('dark-mode', theme === 'dark');
     }, [theme]);
 
     const toggleTheme = () => {

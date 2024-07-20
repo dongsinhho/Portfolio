@@ -1,5 +1,5 @@
 import React from 'react'
-import './not-found.component.css'
+import '../../styles/template-style/not-found.component.css'
 import LinkRef from '../atoms/link-ref'
 
 const NotFound = () => {

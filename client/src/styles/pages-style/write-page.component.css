@@ -1,0 +1,56 @@
+.blog-input {
+    color: var(--text-color);
+}
+
+.blog-info {
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.blog-info label {
+    font-size: 1.2rem;
+}
+
+.blog-info input {
+    font-size: 1.2rem;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    margin-left: 1rem;
+    margin-right: 1rem;
+    border-bottom: 1px solid var(--text-color);
+}
+
+.blog-info input:hover {
+    outline-width: 0;
+    border-bottom: 1px solid var(--text-color);
+}
+
+
+.ck.ck-toolbar {
+    color: var(--text-color) !important;
+    background-color: var(--background-color) !important;
+}
+
+.ck.ck-toolbar button {
+    color: var(--text-color) !important;
+    background-color: var(--background-color) !important;
+}
+
+.ck.ck-editor__main>.ck-editor__editable {
+    border-radius: 0 0 0.5rem 0.5rem !important;
+    background-color: var(--background-color) !important;
+}
+
+.blog-input button{
+    font-size: 1.2rem;
+    padding: 0.7rem 2rem 0.7rem 2rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    background-color: var(--button-background-color);
+    color: var(--text-color);
+    border-radius: .75rem;
+    width: fit-content;
+    --tw-shadow: inset 0 0 0 1px rgba(255,255,255,.4);
+    --tw-shadow-colored: inset 0 0 0 1px var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
