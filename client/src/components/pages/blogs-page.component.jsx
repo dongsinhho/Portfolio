@@ -1,6 +1,6 @@
 import '../../styles/pages-style/blogs-page.component.css'
 import blogs_data from '../../mock-data/blog-data.js'
-import LinkRef from '../atoms/link-ref.js'
+import LinkRef from '../atoms/link-ref'
 
 const Blogs = () => {
     return (
