@@ -19,15 +19,18 @@ const Homepage = () => {
             <div className="overview">
                 <p>Hello I'm Hồ Ngọc Đông Sinh a.k.a Dong Sinh Ho 🚀</p>
                 <p>
-                    Page này chả có mẹ gì hết đó mấy fen, mới làm được có xíu xiu để flex xíu kĩ năng với mấy chị HR (hoặc không...)
+                This page doesn’t have much on it, folks. I’ve only done a little bit to flex some skills for the HR folks (or maybe not…).
                     <br />
-                    Mà cơ bản thì tui làm back-end nên cũng chưa biết show kĩ năng kiểu gì. Thôi thì làm cái web xấu xấu dơ dơ.
+                    <h4>A Little About Me</h4>
+                    Basically, I’m a back-end developer, so showcasing my skills in a flashy way is a bit out of my wheelhouse. But hey, here’s a rough and tumble website anyway. It might be ugly and messy, but it gets the job done.
                     <br />
-                    Xem được thì xem, không xem được thì cút.
-                    <br />
-                    À tui cũng đăng mấy cái blog về technical lượm lượm kiến thức trên mạng. Lỡ có viết bậy thì thông cảm nhé :{"))"}
-                    <br />
-                    Có gì liên hệ hoặc góp ý thì ghé <Link className='about-text' to={routes.about.path}>About Me</Link> nhé --{">>>>>>"}
+                    <h4>What You’ll Find Here</h4>
+                    <li>Technical Blogs: I post some technical blogs where I share knowledge picked up from the vast internet. If you find any mistakes, please bear with me. {"))"} </li>
+                    <li>Random Musings: Occasionally, I might drop some thoughts or ideas that pop into my head.</li>
+                    If you can view it, great. If not, then buzz off.
+                    <br/>
+                    <h4>Get in Touch</h4>
+                    If you have any feedback or want to get in touch, head over to the <Link className='about-text' to={routes.about.path}>About Me</Link> page --{">>>>>>"}
                 </p>
                 <div className='social'>
                     <div className='social-button'>
