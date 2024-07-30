@@ -42,6 +42,7 @@ function App() {
 
 export default App;
 
+// Tags ==> categories
 
 // Authentication / handle private route, redirect
 
