@@ -10,7 +10,12 @@ const About = () => {
             <div className="bio">
                 <h2>About Me</h2>
                 <p>
-                    I am a passionate software engineer with experience in developing web applications using modern technologies. My expertise lies in full-stack development, and I enjoy creating efficient and scalable solutions. I am constantly learning and keeping up-to-date with the latest industry trends to ensure that I am always improving my skills.
+                    I am a young engineer with a passion for exploring technology, a continuous learning mindset, and a readiness to
+                    tackle challenging issues in every assigned task.
+                    As a software developer with over 2 years of experience, originating from a computer network engineering
+                    background, I am confident in my extensive knowledge of networking, operating systems, and system
+                    administration. I am capable of contributing to the development of large-scale backend systems or complex
+                    computer applications.
                 </p>
             </div>
             <div className="skills">
@@ -24,6 +29,11 @@ const About = () => {
                     <li>Operating System</li>
                     <li>CI/CD & Docker Container </li>
                 </ul>
+            </div>
+            <div className="education">
+                <h2>Education</h2>
+                <p>Engineer's Degree in Network and Data Communication, UIT - VNUHCM</p>
+                <p>Graduated: 2023</p>
             </div>
 
         </div>
