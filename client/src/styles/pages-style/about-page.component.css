@@ -40,6 +40,16 @@
     
 }
 
+.education h2 {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.education p {
+    font-size: 1.1em;
+    line-height: 1.6;
+}
+
 .skills li {
     margin: 5px 0;
     padding: 10px;
