@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Server.DTOs;
 using Server.Interfaces;
 
@@ -43,8 +45,8 @@ public class CategoryController : ControllerBase
         }
     }
 
-    [HttpGet("{id:guid}")]
-    public async Task<IActionResult> GetCategoryById(Guid id)
+    [HttpGet("{id:int}")]
+    public async Task<IActionResult> GetCategoryById(int id)
     {
         try
         {
@@ -73,6 +75,7 @@ public class CategoryController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize]
     public async Task<IActionResult> CreateCategory(CreateCategoryRequest request)
     {
         if (!ModelState.IsValid)
@@ -84,7 +87,15 @@ public class CategoryController : ControllerBase
             await _categoryService.CreateAsync(request);
             return Ok(new
             {
-                message = "Blog account successfully created"
+                message = "New Category successfully created"
+            });
+        }
+        catch (DbUpdateException dbEx)
+        {
+            return Conflict(new
+            {
+                message = "Category name already exists",
+                error = dbEx.Message
             });
         }
         catch (Exception ex)
@@ -97,8 +108,9 @@ public class CategoryController : ControllerBase
         }
     }
 
-    [HttpDelete("{id:guid}")]
-    public async Task<IActionResult> DeleteCategory(Guid id)
+    [HttpDelete("{id:int}")]
+    [Authorize]
+    public async Task<IActionResult> DeleteCategory(int id)
     {
         try
         {

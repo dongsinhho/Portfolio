@@ -22,6 +22,21 @@ namespace Server.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("BlogCategory", b =>
+                {
+                    b.Property<Guid>("BlogsId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("CategoriesId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("BlogsId", "CategoriesId");
+
+                    b.HasIndex("CategoriesId");
+
+                    b.ToTable("BlogCategory", (string)null);
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -229,7 +244,9 @@ namespace Server.Migrations
                         .HasColumnType("text");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp with time zone")
+                        .HasDefaultValueSql("now()");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -255,18 +272,31 @@ namespace Server.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<Guid?>("BlogId")
-                        .HasColumnType("uuid");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BlogId");
+                    b.HasIndex("Name")
+                        .IsUnique();
 
-                    b.ToTable("Category");
+                    b.ToTable("Category", (string)null);
+                });
+
+            modelBuilder.Entity("BlogCategory", b =>
+                {
+                    b.HasOne("Server.Models.Blog", null)
+                        .WithMany()
+                        .HasForeignKey("BlogsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Server.Models.Category", null)
+                        .WithMany()
+                        .HasForeignKey("CategoriesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -318,18 +348,6 @@ namespace Server.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Server.Models.Category", b =>
-                {
-                    b.HasOne("Server.Models.Blog", null)
-                        .WithMany("Categories")
-                        .HasForeignKey("BlogId");
-                });
-
-            modelBuilder.Entity("Server.Models.Blog", b =>
-                {
-                    b.Navigation("Categories");
                 });
 #pragma warning restore 612, 618
         }

@@ -9,7 +9,7 @@ public class UpdateBlogRequest
     public string Title { get; set; }
     [StringLength(100)]
     public string Description { get; set; }
-    public List<Category> Categories { get; set; }
+    public ICollection<Category> Categories { get; set; }
     [StringLength(int.MaxValue - 2, MinimumLength = 2)]
     public string Content { get; set; }
 

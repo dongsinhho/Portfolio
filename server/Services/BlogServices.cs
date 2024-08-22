@@ -26,6 +26,10 @@ public class BlogServices : IBlogServices
         {
             var blog = _mapper.Map<Blog>(request);
             blog.CreatedAt = DateTime.UtcNow;
+            blog.Categories = await _context.Categories
+            .Where(c => request.Categories.Contains(c.Id))
+            .ToListAsync();
+
             _context.Blogs.Add(blog);
             await _context.SaveChangesAsync();
         }
@@ -52,7 +56,7 @@ public class BlogServices : IBlogServices
 
     public async Task<IEnumerable<Blog>> GetAllAsync()
     {
-        var blogs = await _context.Blogs.ToListAsync();
+        var blogs = await _context.Blogs.Include(bc => bc.Categories).ToListAsync();
         if (blogs == null)
         {
             throw new Exception("No Blogs found");
