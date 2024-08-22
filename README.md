@@ -5,7 +5,6 @@ Welcome to my portfolio project! This repository contains the source code for my
 ## Table of Contents
 
 - [About](#about)
-- [Features](#features)
 - [Technologies Used](#technologies-used)
 - [Installation](#installation)
 - [Usage](#usage)
@@ -17,19 +16,12 @@ Welcome to my portfolio project! This repository contains the source code for my
 
 This portfolio website serves as a digital showcase of my work and achievements. It includes detailed descriptions of my projects, my resume, and ways to get in touch with me.
 
-## Features
-
-- **Responsive Design**: The website is fully responsive and works on all devices.
-- **Projects Section**: Showcases my projects with descriptions, technologies used, and links to live demos or repositories.
-- **Resume Section**: Provides a downloadable version of my resume.
-- **Contact Form**: Allows visitors to get in touch with me directly through the website.
-
 ## Technologies Used
 
-- HTML
-- CSS
-- JavaScript
-- [Add any frameworks or libraries you are using, e.g., React, Vue, Bootstrap, etc.]
+- React
+- Dotnet 8
+- Postgresql
+- Entity Framework
 
 ## Installation
 
@@ -39,11 +31,32 @@ To run this project locally, follow these steps:
     ```bash
     git clone https://github.com/dongsinhho/Portfolio.git
     ```
-2. Navigate to the project directory:
+2. Add appsettings.json with content
     ```bash
-    cd Portfolio
+    {
+        "DbSettings": {
+            "ConnectionString": "Your connection string"
+        },
+        "Logging": {
+            "LogLevel": {
+            "Default": "Information",
+            "Microsoft.AspNetCore": "Warning"
+            }
+        },
+        "AllowedHosts": "*"
+    }
+
     ```
-3. Open `index.html` in your browser to view the portfolio.
+3. Start API:
+    ```bash
+    cd Portfolio/server
+    dotnet run
+    ```
+4. Start React App
+    ```bash
+    cd Portfolio/client
+    npm start
+    ```
 
 ## Usage
 
@@ -66,10 +79,10 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## Contact
 
-You can reach me at [your email address].
+You can reach me at sinhvua@gmail.com.
 
 Thank you for visiting my portfolio!
 
 ---
 
-*This is a project by [Your Name].*
+*This is a project by Hndsinh.*
