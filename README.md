@@ -31,12 +31,28 @@ To run this project locally, follow these steps:
     ```bash
     git clone https://github.com/dongsinhho/Portfolio.git
     ```
-2. Start API:
+2. Add appsettings.json with content
+    ```bash
+    {
+        "DbSettings": {
+            "ConnectionString": "Your connection string"
+        },
+        "Logging": {
+            "LogLevel": {
+            "Default": "Information",
+            "Microsoft.AspNetCore": "Warning"
+            }
+        },
+        "AllowedHosts": "*"
+    }
+
+    ```
+3. Start API:
     ```bash
     cd Portfolio/server
     dotnet run
     ```
-3. Start React App
+4. Start React App
     ```bash
     cd Portfolio/client
     npm start
