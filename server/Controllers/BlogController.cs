@@ -7,7 +7,6 @@ namespace Server.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-[Authorize]
 public class BlogController : ControllerBase
 {
     private readonly IBlogServices _blogServices;
@@ -18,6 +17,7 @@ public class BlogController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize]
     public async Task<IActionResult> CreateBlog(CreateBlogRequest request)
     {
         if (!ModelState.IsValid)
@@ -102,6 +102,7 @@ public class BlogController : ControllerBase
     }
 
     [HttpDelete("{id:guid}")]
+    [Authorize]
     public async Task<IActionResult> DeleteBlog(Guid id)
     {
         try
@@ -123,6 +124,7 @@ public class BlogController : ControllerBase
     }
 
     [HttpPut("{id:guid}")]
+    [Authorize]
     public async Task<IActionResult> UpdateBlog(Guid id, UpdateBlogRequest request)
     {
         if (!ModelState.IsValid)

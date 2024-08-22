@@ -27,7 +27,24 @@ public class ApplicationDbContext : IdentityDbContext<IdentityUser>
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Blog>().ToTable("Blog").HasKey(x => x.Id);
+        modelBuilder.Entity<Blog>(entity =>
+        {
+            entity.HasMany(x => x.Categories)
+                .WithMany(y => y.Blogs)
+                .UsingEntity(j => j.ToTable("BlogCategory"));
+        });
+
+        modelBuilder.Entity<Blog>(entity =>
+        {
+            entity.ToTable("Blog").HasKey(x => x.Id);
+            entity.Property(x => x.CreatedAt).HasDefaultValueSql("now()");
+        });
+
+        modelBuilder.Entity<Category>(entity =>
+        {
+            entity.ToTable("Category").HasKey(x => x.Id);
+            entity.HasIndex(x => x.Name).IsUnique();
+        });
         base.OnModelCreating(modelBuilder);
     }
 }

@@ -14,7 +14,7 @@ public class CreateBlogRequest
     [StringLength(100)]
     public string Description { get; set; }
     [ListHasElements]
-    public List<Category> Categories { get; set; }
+    public List<int> Categories { get; set; }
     [Required]
     [StringLength(int.MaxValue - 2, MinimumLength = 2)]
     public string Content { get; set; }
