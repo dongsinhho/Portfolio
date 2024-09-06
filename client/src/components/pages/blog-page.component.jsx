@@ -1,8 +1,8 @@
 import { useParams } from 'react-router-dom'
 import BlogTitle from '../molecules/blog-title'
 import '../../styles/pages-style/blog-page.component.css'
-import NotFound from '../templates/not-found.component';
-import ScrollIndicator from '../templates/scroll-indicator.component';
+import NotFound from '../templat3/not-found.component';
+import ScrollIndicator from '../templat3/scroll-indicator.component';
 import ScrollTop from '../molecules/scroll-top';
 import GoBack from '../molecules/go-back';
 import blogs_data from '../../mock-data/blog-data';

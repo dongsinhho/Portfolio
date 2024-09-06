@@ -6,6 +6,7 @@ using Server.Interfaces;
 using Server.Middleware;
 using Server.Services;
 
+var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
 
 // https://tedu.com.vn/lap-trinh-aspnet-core/vong-doi-cua-dependency-injection-transient-singleton-va-scoped-257.html
@@ -23,6 +24,17 @@ builder.Services.AddProblemDetails();
 builder.Services.AddLogging();
 builder.Services.AddAuthentication(); // In some cases, the call to AddAuthentication is automatically made by other extension methods. For example, when using ASP.NET Core Identity, AddAuthentication is called internally.
 builder.Services.AddAuthorization();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:3000")
+            .AllowAnyHeader()
+            .AllowAnyHeader()
+            .AllowCredentials();
+        });
+});
 
 // Scoped
 builder.Services.AddScoped<IBlogServices, BlogServices>();
@@ -52,7 +64,7 @@ if (app.Environment.IsDevelopment())
 }
 
 //app.UseHttpsRedirection();
-
+app.UseCors(MyAllowSpecificOrigins);
 app.UseAuthentication(); // default minimal API called
 app.UseAuthorization();  // default minimal API called
 

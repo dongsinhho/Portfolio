@@ -31,7 +31,7 @@ To run this project locally, follow these steps:
     ```bash
     git clone https://github.com/dongsinhho/Portfolio.git
     ```
-2. Add appsettings.json with content
+2. Add appsettings.json file with content
     ```bash
     {
         "DbSettings": {
