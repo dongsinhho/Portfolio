@@ -1,44 +1,72 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useContext, useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 import '../../styles/pages-style/login-page.component.css'
+import { DataContext } from '../../context/DataProvider'
+import routes from '../../utils/routes'
+import { HandleLogin } from '../../api/UserApi'
+import useAxios from '../../hooks/useAxios'
 
 const Login = () => {
+    const axios = useAxios();
+    const dataContext = useContext(DataContext)
+    const [, setAccessToken] = dataContext.token
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [emailError, setEmailError] = useState('')
     const [passwordError, setPasswordError] = useState('')
 
     const navigate = useNavigate()
+    const location = useLocation();
+    const from = location.state?.from?.pathname || routes.home.path;
 
-    const onButtonClick = () => {
-        // Set initial error values to empty
-        setEmailError('')
-        setPasswordError('')
+    const onButtonClick = async () => {
+        try {
+            // Set initial error values to empty
+            setEmailError('')
+            setPasswordError('')
 
-        // Check if the user has entered both fields correctly
-        if ('' === email) {
-            setEmailError('Please enter your email')
-            return
+            // Check if the user has entered both fields correctly
+            if ('' === email) {
+                setEmailError('Please enter your email')
+                return
+            }
+
+            if (!/^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
+                setEmailError('Please enter a valid email')
+                return
+            }
+
+            if ('' === password) {
+                setPasswordError('Please enter a password')
+                return
+            }
+
+            if (password.length <= 7) {
+                setPasswordError('The password must be 8 characters or longer')
+                return
+            }
+
+            var result = await HandleLogin(axios, email, password);
+            setAccessToken(result.accessToken)
+            localStorage.setItem('accessToken', result.accessToken);
+            axios.saveRefreshTokenToCookie(result.refreshToken)
+            setEmail("")
+            setPassword("")
+            navigate(from, { replace: true });
         }
-
-        if (!/^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
-            setEmailError('Please enter a valid email')
-            return
+        catch (err) {
+            console.log(err)
+            if (!err?.response) {
+                setPasswordError("No server response");
+            }
+            else if (err.response?.status >= 400 && err.response?.status <= 499) {
+                setPasswordError(err.response.statusText)
+            }
+            else {
+                setPasswordError("Login failed")
+            }
         }
-
-        if ('' === password) {
-            setPasswordError('Please enter a password')
-            return
-        }
-
-        if (password.length <= 7) {
-            setPasswordError('The password must be 8 characters or longer')
-            return
-        }
-
-        // Authentication calls will be made here...
-        navigate('/admin')
     }
     return (
         <div className='container'>
