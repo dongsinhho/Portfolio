@@ -1,5 +1,7 @@
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.Tokens;
 using Server;
 using Server.AppDataContext;
 using Server.Interfaces;
@@ -22,7 +24,22 @@ builder.Services.AddSingleton<ApplicationDbContext>();
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
 builder.Services.AddLogging();
-builder.Services.AddAuthentication(); // In some cases, the call to AddAuthentication is automatically made by other extension methods. For example, when using ASP.NET Core Identity, AddAuthentication is called internally.
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = "Issuer",
+            ValidAudience = "Audience",
+            IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("your_secret_key_here_your_secret_key_here")),
+            ClockSkew = TimeSpan.Zero
+        };
+    });
+ // In some cases, the call to AddAuthentication is automatically made by other extension methods. For example, when using ASP.NET Core Identity, AddAuthentication is called internally.
 builder.Services.AddAuthorization();
 builder.Services.AddCors(options =>
 {
@@ -78,4 +95,4 @@ app.MapPost("/logout", async (SignInManager<IdentityUser> signInManager) =>
 
 app.Run();
 
-// Turn off authentication Schema JWT
+// Turn off authentication Schema JWT. use JWT instead of default

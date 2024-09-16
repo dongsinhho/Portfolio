@@ -5,7 +5,7 @@ import { DataContext } from '../context/DataProvider'
 
 const useAxios = () => {
     const data = useContext(DataContext)
-    const [, setAccessToken] = data.token
+    const [accessToken, setAccessToken] = data.token
 
     const config = {
         baseURL: 'http://localhost:8080/',
@@ -26,6 +26,19 @@ const useAxios = () => {
     axiosInstance.getRefreshTokenFromCookie = () => {
         return Cookies.get('refreshToken');
     };
+
+    axiosInstance.deleteRefreshTokenFromCookie = () => {
+        return Cookies.remove('refreshToken');
+    }
+
+    axiosInstance.interceptors.request.use(
+        async request => {
+            if (accessToken) {
+                request.headers.Authorization = `Bearer ${accessToken}`
+            }
+            return request
+        }
+    )
     
     axiosInstance.interceptors.response.use(
         response => response,
@@ -47,7 +60,7 @@ const useAxios = () => {
     const refreshAccessToken = async () => {
         try {
             const response = await axios.post('/api/refresh-token', {
-                token: axiosInstance.getRefreshTokenFromCookie(),
+                refreshToken: axiosInstance.getRefreshTokenFromCookie(),
             });
             return response.data.accessToken;
         } catch (error) {
