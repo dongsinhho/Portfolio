@@ -1,4 +1,9 @@
-.add-blog {
+.list-button {
+    display: flex;
+    justify-content: space-between;
+}
+
+.admin-button {
     padding: 1rem 3rem 1rem 3rem;
     margin-bottom: 1rem;
     background-color: var(--button-background-color);
