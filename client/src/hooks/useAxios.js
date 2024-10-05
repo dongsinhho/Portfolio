@@ -8,7 +8,7 @@ const useAxios = () => {
     const [accessToken, setAccessToken] = data.token
 
     const config = {
-        baseURL: 'http://localhost:8080/',
+        baseURL: 'http://127.0.0.1:8080/',
         withCredentials: true,
         headers: {
             "Content-Type": "application/json"
@@ -33,7 +33,7 @@ const useAxios = () => {
 
     axiosInstance.interceptors.request.use(
         async request => {
-            if (accessToken) {
+            if (request.url !== "/login" && accessToken) {
                 request.headers.Authorization = `Bearer ${accessToken}`
             }
             return request
@@ -44,6 +44,9 @@ const useAxios = () => {
         response => response,
         async (errorResponse) => {
             const config = errorResponse.config;
+            if (errorResponse.config.url === "/login") {
+                return Promise.reject(errorResponse);
+            }
             if (errorResponse.response.status === 401 && !config._retry) {
                 config._retry = true;
                 const newAccessToken = await refreshAccessToken();
