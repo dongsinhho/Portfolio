@@ -1,5 +1,6 @@
 
 export const HandleLogin = async (axios, email, password) => {
+  // Validate request
   const res = await axios.post("/login", JSON.stringify({
     email: email,
     password: password
