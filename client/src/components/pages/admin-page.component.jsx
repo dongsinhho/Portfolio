@@ -19,7 +19,6 @@ const Admin = () => {
 
     const handleLogout = () => {
         HandleLogout(axios)
-        localStorage.removeItem('accessToken')
         axios.deleteRefreshTokenFromCookie()        
         setAccessToken('')
     }

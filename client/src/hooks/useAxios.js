@@ -15,6 +15,7 @@ const useAxios = () => {
         },
     }
     const axiosInstance = axios.create(config)
+    axiosInstance.isRefreshing = false;
     axiosInstance.saveRefreshTokenToCookie = (refreshToken) => {
         Cookies.set('refreshToken', refreshToken, { 
             expires: 7,  // Thời gian sống của cookie, ví dụ: 7 ngày
@@ -49,9 +50,8 @@ const useAxios = () => {
             }
             if (errorResponse.response.status === 401 && !config._retry) {
                 config._retry = true;
-                const newAccessToken = await refreshAccessToken();
+                const newAccessToken = await axiosInstance.refreshAccessToken();
                 if (newAccessToken) {
-                    localStorage.setItem('accessToken', newAccessToken);
                     setAccessToken(newAccessToken)
                     return axios(config);
                 }
@@ -59,19 +59,40 @@ const useAxios = () => {
             return Promise.reject(errorResponse);
         }
     );
+
+    let refreshingPromise = null;
     
-    const refreshAccessToken = async () => {
+    axiosInstance.refreshAccessToken = async () => {
+        let returnData = null;
+        const refreshLogic = async () => {
+            const refreshToken = axiosInstance.getRefreshTokenFromCookie(); 
+            const response = await axiosInstance.post('/refresh', JSON.stringify({
+                refreshToken: refreshToken,
+            }));
+            console.log("co vo day");
+            returnData = response.data.accessToken;
+        }
         try {
-            const response = await axios.post('/api/refresh-token', {
-                refreshToken: axiosInstance.getRefreshTokenFromCookie(),
-            });
-            return response.data.accessToken;
-        } catch (error) {
+            if (refreshingPromise) {
+                await refreshingPromise;
+            }
+            if (!refreshingPromise) {
+                refreshingPromise = refreshLogic();
+                await refreshingPromise;
+
+                refreshingPromise = null;
+            }
+            console.log("return day");
+            console.log(`return day ${returnData}`);
+            return returnData;
+        } 
+        catch (error) {
             console.error('Failed to refresh token:', error);
-            return null;
+            console.log("return hoac day");
+            return returnData;
         }
     };
-
+    
     return axiosInstance
 }
 

@@ -48,8 +48,6 @@ const editorConfig = {
             'redo',
             '|',
             'showBlocks',
-            'formatPainter',
-            'caseChange',
             'selectAll',
             '|',
             'heading',
@@ -62,8 +60,7 @@ const editorConfig = {
             'link',
             'insertImageViaUrl',
             'insertTable',
-            'tableOfContents',
-            'insertTemplate',
+
             'codeBlock',
             'htmlEmbed',
             '|',
