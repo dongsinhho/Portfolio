@@ -6,7 +6,7 @@ import { ClassicEditor } from 'ckeditor5';
 import '../../styles/pages-style/write-page.component.css'
 import 'ckeditor5/ckeditor5.css';
 import editorConfig from '../../utils/ckEditorConfig';
-import { GetAllCategory } from '../../api/BlogApi';
+import { CreateBlog, GetAllCategory } from '../../api/BlogApi';
 import useAxios from '../../hooks/useAxios';
 
 const WritePage = (props) => {
@@ -30,8 +30,13 @@ const WritePage = (props) => {
 
     useEffect(() => {
         const getCategories = async () => {
-            const res = await GetAllCategory(axios);
-			setCategoryList([{ id: "", name: "--" }, ...res.data]);
+            try {
+                const res = await GetAllCategory(axios);
+                setCategoryList([{ id: "", name: "--" }, ...res.data]);
+            }
+            catch (err) {
+                setCategoryList([{ id: "", name: "--" }]);
+            }
         }
         getCategories();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -60,10 +65,9 @@ const WritePage = (props) => {
         setSelectedCategory(newCategoryList)
     }
 
-    const createPost = () => {
-        console.log(selectedCategory)
+    const createPost = async () => {
         if (!formData.title) {
-            console.log("missing title")
+            alert("missing title")
             return
         }
         if (!formData.description) {
@@ -75,8 +79,33 @@ const WritePage = (props) => {
             return
         }
 
-        if (!categoryList || categoryList.length === 0) {
-            
+        if (!selectedCategory || selectedCategory.length === 0) {
+            // Handle UnCategory case    
+        }
+
+        let categories = []
+        selectedCategory.forEach(element => {
+            const cate = categoryList.find(obj => {
+                return obj.name === element
+              })
+            categories.push(cate.id);
+        });
+        console.log(categories)
+        try {
+            var result = await CreateBlog(axios, formData.title, formData.description, formData.content, categories);
+            //if (resut && result.)
+            console.log(result);
+        }
+        catch (err) {
+            if (!err?.response) {
+                alert("No server response");
+            }
+            else if (err.response?.status >= 400 && err.response?.status <= 499) {
+                alert(err.response.statusText)
+            }
+            else {
+                alert("Create post failed")
+            }
         }
     }
 

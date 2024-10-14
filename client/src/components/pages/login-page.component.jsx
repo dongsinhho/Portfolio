@@ -54,7 +54,6 @@ const Login = () => {
             }
             var result = await HandleLogin(axios, email, password);
             setAccessToken(result.accessToken)
-            localStorage.setItem('accessToken', result.accessToken);
             axios.saveRefreshTokenToCookie(result.refreshToken)
             setEmail("")
             setPassword("")
