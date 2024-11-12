@@ -55,16 +55,17 @@ public class CategoryServices : ICategoryServices
         }
     }
 
-    public async Task<IEnumerable<Category>> GetAllAsync()
+    public async Task<IEnumerable<AllCategoryResponse>> GetAllAsync()
     {
         var categories = await _context.Categories.ToListAsync();
-        if (categories == null)
+        var response = _mapper.Map<List<AllCategoryResponse>>(categories);
+        if (response == null)
         {
             throw new KeyNotFoundException($"No category found.");
         }
         else
         {
-            return categories;
+            return response;
         }
     }
 

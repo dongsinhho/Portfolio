@@ -11,12 +11,12 @@ const Card = props => {
       <div className='card-content'>
         <div>
           <div className='card-time'>
-            <p>{blog.post_date.toLocaleString()}</p>
+            <p>{blog.createdAt.toLocaleString()}</p>
             <p>{blog.time_to_read / 60} min read</p>
           </div>
           <p className='card-title'>{blog.title}</p>
           <div className='card-tags'>
-            {blog.tags.map((tag, index) => (
+            {blog.categories.map((tag, index) => (
               <Tag name={tag.name} link={tag.link} referrer key={index}></Tag>
             ))}
           </div>
