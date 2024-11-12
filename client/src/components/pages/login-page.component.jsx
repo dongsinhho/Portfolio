@@ -58,6 +58,7 @@ const Login = () => {
             setEmail("")
             setPassword("")
             setButtonDisable(false)
+            console.log(`navigate ${from}`)
             navigate(from, { replace: true });
         }
         catch (err) {

@@ -1,16 +1,32 @@
 export const CreateBlog = async (axios, title, desc, content, category) => {
   // Validate data
-  const res = await axios.post("/api/blog", JSON.stringify({
+  const req = JSON.stringify({
     title: title,
     description: desc,
     content: content,
-    category: category
-  }))
+    categories: category
+  });
+  const res = await axios.post("/api/blog", req)
   return res.data
+}
+
+export const GetAllBlogs = async (axios) => {
+  const res = await axios.get("/api/blog")
+  return res.data
+}
+
+export const GetBlogById = async (axios, id) => {
+  const res = await axios.get(`/api/blog/${id}`)
+  return res.data
+}
+
+export const DeleteBlogById = async (axios, id) => {
+  const res = await axios.delete(`/api/blog/${id}`)
+  return res
 }
 
 export const GetAllCategory = async (axios) => {
   const res = await axios.get("/api/category")
-  console.log(res)
   return res.data
 }
+

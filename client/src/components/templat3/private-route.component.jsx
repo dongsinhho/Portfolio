@@ -17,7 +17,6 @@ const PrivateRoute = () => {
       if (!accessToken) {
         try {
           const newAccessToken = await axios.refreshAccessToken();
-          console.log(`newAccessToken: ${newAccessToken}`)
           if (newAccessToken) {
             setAccessToken(newAccessToken);
             setIsLoading(false);
@@ -31,10 +30,12 @@ const PrivateRoute = () => {
           setIsLoading(false);
         }
       }
+      else {
+        setIsLoading(false);
+      }
     }
-    
     RefreshToken();
-  }, [])  
+  }, [accessToken, axios, setAccessToken])  
 
   
   return (

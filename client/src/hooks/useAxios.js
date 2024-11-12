@@ -69,7 +69,6 @@ const useAxios = () => {
             const response = await axiosInstance.post('/refresh', JSON.stringify({
                 refreshToken: refreshToken,
             }));
-            console.log("co vo day");
             returnData = response.data.accessToken;
         }
         try {
@@ -82,13 +81,10 @@ const useAxios = () => {
 
                 refreshingPromise = null;
             }
-            console.log("return day");
-            console.log(`return day ${returnData}`);
             return returnData;
         } 
         catch (error) {
             console.error('Failed to refresh token:', error);
-            console.log("return hoac day");
             return returnData;
         }
     };

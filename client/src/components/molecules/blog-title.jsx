@@ -10,12 +10,12 @@ const BlogTitle = props => {
         <div className='blog-title'>
             <p className='blog-title-name'>{blog.title}</p>
             <div className='blog-list-tag'>
-                {blog.tags.map((tag, index) => (
+                {blog.categories.map((tag, index) => (
                     <Tag name={tag.name} referrer key={index} />
                 ))}
             </div>
             <div className='blog-title-time'>
-                <p>{blog.post_date.toLocaleString()}</p>
+                <p>{blog.createdAt.toLocaleString()}</p>
                 <span>&nbsp;-&nbsp;</span>
                 <p>{blog.time_to_read / 60} min read</p>
             </div>
@@ -24,7 +24,7 @@ const BlogTitle = props => {
 }
 
 BlogTitle.propTypes = {
-    blog: PropTypes.object.isRequired
+    blog: PropTypes.object
 }
 
 export default BlogTitle

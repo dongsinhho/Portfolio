@@ -6,27 +6,24 @@ import { ClassicEditor } from 'ckeditor5';
 import '../../styles/pages-style/write-page.component.css'
 import 'ckeditor5/ckeditor5.css';
 import editorConfig from '../../utils/ckEditorConfig';
-import { CreateBlog, GetAllCategory } from '../../api/BlogApi';
+import { CreateBlog, GetAllCategory, GetBlogById } from '../../api/BlogApi';
 import useAxios from '../../hooks/useAxios';
+import { useParams } from 'react-router-dom';
 
 const WritePage = (props) => {
     const axios = useAxios();
+    const { blogId } = useParams();
     const [isLayoutReady, setIsLayoutReady] = useState(false);
     const [formData, setFormData] = useState({});
     const [selectedCategory, setSelectedCategory] = useState([]);
     const [categoryList, setCategoryList] = useState([]);
+    const [editorInstance, setEditorInstance ] = useState(null);
 
-
+    // useEffect(() => {
     
-    const { blogDetails } = props;
-    if (blogDetails) {
-        setFormData(blogDetails)
-    }
-
-    useEffect(() => {
-        setIsLayoutReady(true);
-        return () => setIsLayoutReady(false);
-    }, []);
+    //     //editorInstance.setData(formData.content);
+    //     return () => setIsLayoutReady(false);
+    // }, []);
 
     useEffect(() => {
         const getCategories = async () => {
@@ -38,13 +35,36 @@ const WritePage = (props) => {
                 setCategoryList([{ id: "", name: "--" }]);
             }
         }
+        const getBlogDetail = async () => {
+            try {
+                const res = await GetBlogById(axios, blogId);
+                console.log(res)
+                setFormData({
+                    title: res.data.title, 
+                    description: res.data.description,
+                    content: res.data.content
+                })
+                setSelectedCategory(res.data.categories)
+            }
+            catch (err) {
+                setCategoryList([{ id: "", name: "--" }]);
+            }
+        }
+
+        if (blogId) {
+            getBlogDetail();
+        }
         getCategories();
+        setIsLayoutReady(true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [setCategoryList]);
 
 
     const inputOnChangeHandler = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value })
+    }
+    const handleCkEditorChangeOnReady = (e, editor) => {
+        setEditorInstance(editor);
     }
 
     const handleCkEditorChange = (e, editor) => {
@@ -56,12 +76,10 @@ const WritePage = (props) => {
         if (!value || selectedCategory.includes(value) || value === "--") {
             return
         }
-        console.log(value)
         setSelectedCategory([...selectedCategory, value])
     }
     const handleRemoveCategory = (e) => {
         const newCategoryList = selectedCategory.filter(item => item !== e)
-        console.log(newCategoryList)
         setSelectedCategory(newCategoryList)
     }
 
@@ -90,11 +108,12 @@ const WritePage = (props) => {
               })
             categories.push(cate.id);
         });
-        console.log(categories)
         try {
             var result = await CreateBlog(axios, formData.title, formData.description, formData.content, categories);
-            //if (resut && result.)
-            console.log(result);
+            alert(result.message)
+            editorInstance.setData('');
+            setSelectedCategory([])
+            setFormData({});
         }
         catch (err) {
             if (!err?.response) {
@@ -119,10 +138,10 @@ const WritePage = (props) => {
                 <div className='blog-info'>
                     <div>
                         <label>Title
-                            <input type='text' name='title' onChange={inputOnChangeHandler} />
+                            <input type='text' value={formData?.title ? formData.title : ""} name='title' onChange={inputOnChangeHandler} />
                         </label>
                         <label>Description
-                            <input type='text' name='description' onChange={inputOnChangeHandler} />
+                            <input type='text' value={formData?.description ? formData.description : ""} name='description' onChange={inputOnChangeHandler} />
                         </label>
                     </div>
                     <div className='category-section'>
@@ -158,11 +177,11 @@ const WritePage = (props) => {
                 <div>
                     <div>
                         {isLayoutReady &&
-                            <CKEditor editor={ClassicEditor} config={editorConfig}
-                                onReady={(editor) => {
-                                    handleCkEditorChange(null, editor)
-                                }}
-                                onChange={handleCkEditorChange} />}
+                            <CKEditor editor={ClassicEditor} config={editorConfig} data={formData.content}
+                            onReady={(editor) => {
+                                handleCkEditorChangeOnReady(null, editor);
+                            }}
+                            onChange={handleCkEditorChange} />}
                     </div>
                 </div>
                 <button id='post-button' onClick={createPost}>Post</button>
