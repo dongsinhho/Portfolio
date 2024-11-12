@@ -17,8 +17,8 @@ const ScrollIndicator = () => {
     }, [])
 
     return (
-        <div class="progress-container">
-            <div class="progress-bar" style={{width: `${scrollTop}%`}}></div>
+        <div className="progress-container">
+            <div className="progress-bar" style={{width: `${scrollTop}%`}}></div>
         </div>
     )
 }

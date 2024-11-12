@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom'
 import '../../styles/template-style/header.component.css';
+import { DataContext } from '../../context/DataProvider';
 
 const Header = () => {
     const mode = () => {
@@ -13,6 +14,8 @@ const Header = () => {
     }
 
     const [theme, setTheme] = useState(mode);
+    const dataContext = useContext(DataContext)
+    const [accessToken,] = dataContext.token
 
     useEffect(() => {
         document.documentElement.setAttribute('data-theme', theme);
@@ -35,6 +38,10 @@ const Header = () => {
                             <li><Link className='link' to="about">ABOUT</Link></li>
                             <li><Link className='link' to="blog">BLOG</Link></li>
                             <li><Link className='link' to="projects">PROJECTS</Link></li>
+                            {
+                                accessToken &&
+                                <li><Link className='link' to="admin">ADMIN</Link></li>
+                            }
                         </ul>
                     </nav>
                     <div className='theme' onClick={toggleTheme}>

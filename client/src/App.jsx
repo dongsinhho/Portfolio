@@ -1,12 +1,14 @@
 import './App.css';
 import { Suspense, lazy } from 'react';
-import {BrowserRouter, Route, Routes} from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 import routes from './utils/routes';
 import Loader from './components/atoms/loader';
-import Header from './components/templates/header.component';
-import Footer from './components/templates/footer.component';
-import NotFound from './components/templates/not-found.component';
+import Header from './components/templat3/header.component';
+import Footer from './components/templat3/footer.component';
+import NotFound from './components/templat3/not-found.component';
+import { DataProvider } from './context/DataProvider';
+import PrivateRoute from './components/templat3/private-route.component';
 
 const Homepage = lazy(() => import('./components/pages/home-page.component'))
 const About = lazy(() => import('./components/pages/about-page.component'))
@@ -20,23 +22,28 @@ const Admin = lazy(() => import('./components/pages/admin-page.component'))
 
 function App() {
   return (
-    <BrowserRouter basename='/'>
-      <Header/>
-      <Suspense fallback={<Loader/>}>
-        <Routes>
-          <Route path={routes.home.path} Component={Homepage}/>
-          <Route path={routes.blog.path} Component={Blogs}/>
-          <Route path={`${routes.blog.path}/:blogId`} Component={Blog}/>
-          <Route path={routes.about.path} Component={About}/>
-          <Route path={routes.projects.path} Component={Projects}/>
-          <Route path={'/write'} Component={WritePage}/>
-          <Route path={'/login'} Component={Login}/>
-          <Route path={'/admin'} Component={Admin}/>
-          <Route path='*' Component={NotFound}/>
-        </Routes>
-      </Suspense>
-      <Footer/>
-    </BrowserRouter>
+    <DataProvider>
+      <BrowserRouter basename='/'>
+        <Header />
+        <Suspense fallback={<Loader />}>
+          <Routes>
+            <Route path={routes.home.path} Component={Homepage} />
+            <Route path={routes.blog.path} Component={Blogs} />
+            <Route path={`${routes.blog.path}/:blogId`} Component={Blog} />
+            <Route path={routes.about.path} Component={About} />
+            <Route path={routes.projects.path} Component={Projects} />
+            <Route element={<PrivateRoute />}>
+              <Route path={routes.write.path} Component={WritePage} />
+              <Route path={routes.admin.path} Component={Admin} />
+              <Route path={`${routes.write.path}/:blogId`} Component={WritePage} />
+            </Route>
+            <Route path={routes.login.path} Component={Login} />
+            <Route path='*' Component={NotFound} />
+          </Routes>
+        </Suspense>
+        <Footer />
+      </BrowserRouter>
+    </DataProvider>
   );
 }
 
@@ -47,8 +54,6 @@ export default App;
 // Authentication / handle private route, redirect
 
 // Write Blog
-
-// Create API C#
 
 // Search page
 
@@ -68,11 +73,9 @@ ckeditor react -> lưu -> lấy thẻ html từ ckeditor -> post
 Lưu thẳng HTML vào DB
 
 
-Render
-https://stackoverflow.com/questions/37337289/react-js-set-innerhtml-vs-dangerouslysetinnerhtml
-
-
 a/1/b/2/
 
 dô admin page thì hiện ra list blog và có thể ấn vào từng blog để chỉnh sửa
 */
+
+// Handle edit category

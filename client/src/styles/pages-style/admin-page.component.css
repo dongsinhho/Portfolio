@@ -1,4 +1,9 @@
-.add-blog {
+.list-button {
+    display: flex;
+    justify-content: space-between;
+}
+
+.admin-button {
     padding: 1rem 3rem 1rem 3rem;
     margin-bottom: 1rem;
     background-color: var(--button-background-color);
@@ -23,4 +28,10 @@
     box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
     padding: 20px;
     border-radius: 8px;
+}
+
+.action-list {
+    text-decoration: underline;
+    display: inline;
+    margin-right: 1em;
 }
