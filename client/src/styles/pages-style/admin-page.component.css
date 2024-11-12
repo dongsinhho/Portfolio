@@ -29,3 +29,9 @@
     padding: 20px;
     border-radius: 8px;
 }
+
+.action-list {
+    text-decoration: underline;
+    display: inline;
+    margin-right: 1em;
+}

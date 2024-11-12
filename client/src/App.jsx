@@ -35,6 +35,7 @@ function App() {
             <Route element={<PrivateRoute />}>
               <Route path={routes.write.path} Component={WritePage} />
               <Route path={routes.admin.path} Component={Admin} />
+              <Route path={`${routes.write.path}/:blogId`} Component={WritePage} />
             </Route>
             <Route path={routes.login.path} Component={Login} />
             <Route path='*' Component={NotFound} />
@@ -76,3 +77,5 @@ a/1/b/2/
 
 dô admin page thì hiện ra list blog và có thể ấn vào từng blog để chỉnh sửa
 */
+
+// Handle edit category

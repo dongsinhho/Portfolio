@@ -1,4 +1,5 @@
 import '../../styles/template-style/footer.component.css'
+import LinkRef from '../atoms/link-ref';
 
 const Footer = () => {
     return (
@@ -56,7 +57,7 @@ const Footer = () => {
                         </svg>
                     </a>
                 </div>
-                <p>&copy; 2022-2024 Ho Ngoc Dong Sinh. CC BY-NC-NA 4.0</p>
+                <p>&copy; 2022-2024 Ho Ngoc Dong Sinh. <LinkRef text="CC BY-NC-SA 4.0" link='https://creativecommons.org/licenses/by-nc-sa/4.0/' referrer={false}/> </p>
             </div>
         </footer>
     );

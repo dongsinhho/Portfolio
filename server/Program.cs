@@ -20,9 +20,9 @@ builder.Services.AddSwaggerGen();                                               
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.Configure<DbSettings>(builder.Configuration.GetSection("DbSettings")); // Điều này nói với DI container rằng bất cứ khi nào có yêu cầu về IOptions<DbSettings>, nó nên cung cấp một instance được cấu hình với các thiết lập từ appsettings.json.
 builder.Services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
-builder.Services.AddSingleton<ApplicationDbContext>();
+
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
-builder.Services.AddProblemDetails();
+//builder.Services.AddProblemDetails();
 builder.Services.AddLogging();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -45,8 +45,9 @@ builder.Services.AddCors(options =>
         {
             policy.WithOrigins("http://localhost:3000")
             .AllowAnyHeader()
-            .AllowAnyHeader()
+            .AllowAnyMethod()
             .AllowCredentials();
+
         });
 });
 
@@ -57,6 +58,7 @@ builder.Services.AddIdentityApiEndpoints<IdentityUser>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 // Trasient
+builder.Services.AddTransient<ApplicationDbContext>();
 builder.Services.AddControllers();
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
