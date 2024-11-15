@@ -69,7 +69,8 @@ public class BlogServices : IBlogServices
 
     public async Task<Blog> GetByIdAsync(Guid id)
     {
-        var blog = await _context.Blogs.FindAsync(id);
+        var blog = await _context.Blogs.Include(bc => bc.Categories)
+                                        .FirstOrDefaultAsync(b => b.Id == id);
         if (blog == null)
         {
             throw new KeyNotFoundException($"No blog with Id {id} found.");
