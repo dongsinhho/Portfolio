@@ -27,10 +27,11 @@ public class BlogController : ControllerBase
 
         try
         {
-            await _blogServices.CreateAsync(request);
+            Guid id = await _blogServices.CreateAsync(request);
             return Ok(new
             {
-                message = "Blog account successfully created"
+                message = "Blog account successfully created",
+                data = id.ToString()
             });
         }
         catch (Exception ex)
