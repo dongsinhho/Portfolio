@@ -77,5 +77,3 @@ a/1/b/2/
 
 dô admin page thì hiện ra list blog và có thể ấn vào từng blog để chỉnh sửa
 */
-
-// Handle edit category
