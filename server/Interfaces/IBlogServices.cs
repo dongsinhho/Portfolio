@@ -7,7 +7,7 @@ public interface IBlogServices
 {
     Task<IEnumerable<Blog>> GetAllAsync();
     Task<Blog> GetByIdAsync(Guid id);
-    Task CreateAsync(CreateBlogRequest request);
+    Task<Guid> CreateAsync(CreateBlogRequest request);
     Task UpdateAsync(Guid id, UpdateBlogRequest request);
     Task DeleteAsync(Guid id);
 }

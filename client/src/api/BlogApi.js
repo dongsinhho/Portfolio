@@ -10,6 +10,19 @@ export const CreateBlog = async (axios, title, desc, content, category) => {
   return res.data
 }
 
+export const UpdateBlog = async (axios, id, title, desc, content, category) => {
+  // Validate data
+  const req = JSON.stringify({
+    title: title,
+    description: desc,
+    content: content,
+    categories: category
+  });
+  console.log(req)
+  const res = await axios.put(`/api/blog/${id}`, req)
+  return res.data
+}
+
 export const GetAllBlogs = async (axios) => {
   const res = await axios.get("/api/blog")
   return res.data
