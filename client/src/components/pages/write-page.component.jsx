@@ -6,7 +6,7 @@ import { ClassicEditor } from 'ckeditor5';
 import '../../styles/pages-style/write-page.component.css'
 import 'ckeditor5/ckeditor5.css';
 import editorConfig from '../../utils/ckEditorConfig';
-import { CreateBlog, GetAllCategory, GetBlogById } from '../../api/BlogApi';
+import { CreateBlog, GetAllCategory, GetBlogById, UpdateBlog } from '../../api/BlogApi';
 import useAxios from '../../hooks/useAxios';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -126,7 +126,16 @@ const WritePage = (props) => {
         });
         try {
             if (blogId) {
-
+                var result = await UpdateBlog(axios, blogId, formData.title, formData.description, formData.content, categories);
+                alert(result.message)
+                editorInstance.setData('');
+                setSelectedCategory([])
+                setFormData({
+                    ...formData,
+                    title: "",
+                    description: ""
+                });
+                navigate(`/blog/${blogId}`)
             }
             else {
                 var result = await CreateBlog(axios, formData.title, formData.description, formData.content, categories);
