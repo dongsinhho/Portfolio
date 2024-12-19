@@ -3,9 +3,11 @@ import PropTypes from 'prop-types'
 
 import '../../styles/molecules-style/blog-title.css'
 import Tag from '../atoms/tag'
+import { CalcTimeToRead, CalcDateTime } from '../../utils/LogicFunc'
 
 const BlogTitle = props => {
     const { blog } = props
+
     return (
         <div className='blog-title'>
             <p className='blog-title-name'>{blog.title}</p>
@@ -15,9 +17,9 @@ const BlogTitle = props => {
                 ))}
             </div>
             <div className='blog-title-time'>
-                <p>{blog.createdAt.toLocaleString()}</p>
+                <p>{CalcDateTime(blog.createdAt)}</p>
                 <span>&nbsp;-&nbsp;</span>
-                <p>{blog.time_to_read / 60} min read</p>
+                <p>{CalcTimeToRead(blog.content)}</p>
             </div>
         </div>
     )

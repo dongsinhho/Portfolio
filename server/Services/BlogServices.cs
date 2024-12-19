@@ -20,7 +20,7 @@ public class BlogServices : IBlogServices
         _mapper = mapper;
     }
 
-    public async Task CreateAsync(CreateBlogRequest request)
+    public async Task<Guid> CreateAsync(CreateBlogRequest request)
     {
         try
         {
@@ -32,6 +32,7 @@ public class BlogServices : IBlogServices
 
             _context.Blogs.Add(blog);
             await _context.SaveChangesAsync();
+            return blog.Id;
         }
         catch (Exception ex)
         {
@@ -69,7 +70,8 @@ public class BlogServices : IBlogServices
 
     public async Task<Blog> GetByIdAsync(Guid id)
     {
-        var blog = await _context.Blogs.FindAsync(id);
+        var blog = await _context.Blogs.Include(bc => bc.Categories)
+                                        .FirstOrDefaultAsync(b => b.Id == id);
         if (blog == null)
         {
             throw new KeyNotFoundException($"No blog with Id {id} found.");
@@ -81,7 +83,7 @@ public class BlogServices : IBlogServices
     {
         try
         {
-            var blog = await _context.Blogs.FindAsync(id);
+            var blog = await _context.Blogs.Include(bc => bc.Categories).FirstOrDefaultAsync(b => b.Id == id);
             if (blog == null)
             {
                 throw new KeyNotFoundException($"No blog with Id {id} found.");
@@ -94,15 +96,24 @@ public class BlogServices : IBlogServices
             {
                 blog.Description = request.Description;
             }
-            if (request.Categories != null)
-            {
-                blog.Categories = request.Categories;
-            }
             if (request.Content != null)
             {
                 blog.Content = request.Content;
             }
+            blog.Categories.Clear();
             blog.UpdatedAt = DateTime.UtcNow;
+            _context.Blogs.Update(blog);
+            await _context.SaveChangesAsync();
+
+            foreach (var categoryId in request.Categories)
+            {
+                var category = await _context.Categories.FindAsync(categoryId);
+                if (category != null)
+                {
+                    blog.Categories.Add(category);
+                }
+            }
+            _context.Blogs.Update(blog);
             await _context.SaveChangesAsync();
         }
         catch (Exception ex)
@@ -110,6 +121,5 @@ public class BlogServices : IBlogServices
             _logger.LogError(ex, "An error occurred while update Category");
             throw new Exception($"An error occurred while update Category Id {id}");
         }
-
     }
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import { ClassicEditor } from 'ckeditor5';
@@ -6,24 +6,26 @@ import { ClassicEditor } from 'ckeditor5';
 import '../../styles/pages-style/write-page.component.css'
 import 'ckeditor5/ckeditor5.css';
 import editorConfig from '../../utils/ckEditorConfig';
-import { CreateBlog, GetAllCategory, GetBlogById } from '../../api/BlogApi';
+import { CreateBlog, GetAllCategory, GetBlogById, UpdateBlog } from '../../api/BlogApi';
 import useAxios from '../../hooks/useAxios';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const WritePage = (props) => {
     const axios = useAxios();
     const { blogId } = useParams();
+    const navigate = useNavigate();
     const [isLayoutReady, setIsLayoutReady] = useState(false);
+    const formDataRef = useRef();
     const [formData, setFormData] = useState({});
     const [selectedCategory, setSelectedCategory] = useState([]);
     const [categoryList, setCategoryList] = useState([]);
     const [editorInstance, setEditorInstance ] = useState(null);
 
-    // useEffect(() => {
+    useEffect(() => {
     
-    //     //editorInstance.setData(formData.content);
-    //     return () => setIsLayoutReady(false);
-    // }, []);
+        //editorInstance.setData(formData.content);
+        return () => setIsLayoutReady(false);
+    }, []);
 
     useEffect(() => {
         const getCategories = async () => {
@@ -38,26 +40,35 @@ const WritePage = (props) => {
         const getBlogDetail = async () => {
             try {
                 const res = await GetBlogById(axios, blogId);
-                console.log(res)
+
                 setFormData({
-                    title: res.data.title, 
+                    title: res.data.title,
                     description: res.data.description,
                     content: res.data.content
                 })
-                setSelectedCategory(res.data.categories)
+                
+                formDataRef.current = {
+                    title: res.data.title,
+                    description: res.data.description,
+                    content: res.data.content
+                }
+                const selectedCat = []
+                res.data.categories.forEach(element => {
+                    selectedCat.push(element.name);
+                });
+                setSelectedCategory(selectedCat)
             }
             catch (err) {
                 setCategoryList([{ id: "", name: "--" }]);
             }
         }
-
+        getCategories();
         if (blogId) {
             getBlogDetail();
         }
-        getCategories();
         setIsLayoutReady(true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [setCategoryList]);
+    }, []);
 
 
     const inputOnChangeHandler = (e) => {
@@ -67,9 +78,14 @@ const WritePage = (props) => {
         setEditorInstance(editor);
     }
 
-    const handleCkEditorChange = (e, editor) => {
+    const handleCkEditorChange = (e,editor) => {
         const content = editor.getData()
-        setFormData({ ...formData, content: content })
+        if (formData.title || formData.description) {
+            setFormData({ ...formData, content: content })
+        }
+        else {
+            setFormData({ ...formDataRef.current, content: content })
+        }
     }
 
     const chooseCategory = (value) => {
@@ -109,11 +125,30 @@ const WritePage = (props) => {
             categories.push(cate.id);
         });
         try {
-            var result = await CreateBlog(axios, formData.title, formData.description, formData.content, categories);
-            alert(result.message)
-            editorInstance.setData('');
-            setSelectedCategory([])
-            setFormData({});
+            if (blogId) {
+                var result = await UpdateBlog(axios, blogId, formData.title, formData.description, formData.content, categories);
+                alert(result.message)
+                editorInstance.setData('');
+                setSelectedCategory([])
+                setFormData({
+                    ...formData,
+                    title: "",
+                    description: ""
+                });
+                navigate(`/blog/${blogId}`)
+            }
+            else {
+                var result = await CreateBlog(axios, formData.title, formData.description, formData.content, categories);
+                alert(result.message)
+                editorInstance.setData('');
+                setSelectedCategory([])
+                setFormData({
+                    ...formData,
+                    title: "",
+                    description: ""
+                });
+                navigate(`/blog/${result.data}`)
+            }
         }
         catch (err) {
             if (!err?.response) {
@@ -127,7 +162,6 @@ const WritePage = (props) => {
             }
         }
     }
-
     return (
         <div className="container">
             <div className='page-title'>
