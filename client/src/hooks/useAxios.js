@@ -8,7 +8,7 @@ const useAxios = () => {
     const [accessToken, setAccessToken] = data.token
 
     const config = {
-        baseURL: 'http://127.0.0.1:8080/',
+        baseURL: process.env.API_URL,
         withCredentials: true,
         headers: {
             "Content-Type": "application/json"
