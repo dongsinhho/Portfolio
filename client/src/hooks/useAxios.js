@@ -7,7 +7,6 @@ const useAxios = () => {
     const data = useContext(DataContext)
     const [accessToken, setAccessToken] = data.token
 
-    console.log(process.env)
     const config = {
         baseURL: process.env.API_URL ?? process.env.REACT_APP_API_URL,
         withCredentials: true,
