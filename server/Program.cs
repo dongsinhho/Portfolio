@@ -9,6 +9,7 @@ using Server.Middleware;
 using Server.Services;
 
 var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
 var builder = WebApplication.CreateBuilder(args);
 
 // https://tedu.com.vn/lap-trinh-aspnet-core/vong-doi-cua-dependency-injection-transient-singleton-va-scoped-257.html
@@ -19,6 +20,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();                                                       // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.Configure<DbSettings>(builder.Configuration.GetSection("DbSettings")); // Điều này nói với DI container rằng bất cứ khi nào có yêu cầu về IOptions<DbSettings>, nó nên cung cấp một instance được cấu hình với các thiết lập từ appsettings.json.
+var allowedOrigins = builder.Configuration.GetSection("AllowedOrigins").Get<string[]>();
 builder.Services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
 
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
@@ -43,12 +45,10 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: MyAllowSpecificOrigins,
         policy =>
         {
-            policy.SetIsOriginAllowed((host) => true)
+            policy.WithOrigins(allowedOrigins ?? Array.Empty<string>())
             .AllowAnyHeader()
             .AllowAnyMethod()
-            .SetIsOriginAllowed((host) => true)
             .AllowCredentials();
-
         });
 });
 
