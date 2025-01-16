@@ -3,8 +3,8 @@ POST http://localhost:8080/login
 Content-Type: application/json
 
 {
-  "email": "sinhvua@gmail.com",
-  "password": "Sinhlolfo3123!"
+  "email": "",
+  "password": ""
 }
 
 ### LOG OUT
