@@ -33,7 +33,7 @@ jobs:
     #     docker pull dongsinhho/portfolio-server:latest
     #     docker stop your-container-name || true
     #     docker rm your-container-name || true
-    #     docker run -d --name your-container-name -p 80:80 dongsinhho/portfolio-server:latest
+    #     docker run -d -e AllowOrigins__0='https://site1' -e AllowOrigins__1='https://site2' -e AllowOrigins__2='https://site3' -e DBSettings__ConnectionString='cntstring' -e Urls=http://0.0.0.0:3000 -p 3000:3000 --name portfolio-server dongsinhho/portfolio-server:$TAG_NAME
     #     EOF
     #   env:
     #     SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
