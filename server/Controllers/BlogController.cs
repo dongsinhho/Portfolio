@@ -102,6 +102,35 @@ public class BlogController : ControllerBase
         }
     }
 
+    [HttpGet("slug/{slug}")]
+    public async Task<IActionResult> GetBlogBySlug(string slug)
+    {
+        try
+        {
+            var blog = await _blogServices.GetBySlugAsync(slug);
+            if (blog == null)
+            {
+                return NotFound(new
+                {
+                    message = $"No Blog item with slug '{slug}' found."
+                });
+            }
+            return Ok(new
+            {
+                message = $"Successfully retrieved Blog with slug '{slug}'",
+                data = blog
+            });
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new
+            {
+                message = $"An error occurred while retrieving blog with slug '{slug}'",
+                error = ex.Message
+            });
+        }
+    }
+
     [HttpDelete("{id:guid}")]
     [Authorize]
     public async Task<IActionResult> DeleteBlog(Guid id)

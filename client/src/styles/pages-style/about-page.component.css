@@ -60,3 +60,94 @@
     --tw-shadow-colored: inset 0 0 0 1px var(--tw-shadow-color);
     box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
+
+.about-page {
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    background: var(--background-color);
+}
+
+.personal-info .headline {
+    color: var(--link-color);
+    font-weight: 600;
+    margin-bottom: 0.5em;
+}
+
+.contact-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2em;
+    justify-content: center;
+    margin-top: 0.5em;
+    margin-bottom: 1.5em;
+    font-size: 1.1em;
+}
+.contact-row a, .contact-row span {
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+    color: var(--text-color);
+    text-decoration: none;
+    background: var(--button-background-color);
+    padding: 0.4em 1em;
+    border-radius: 8px;
+    transition: background 0.2s;
+}
+.contact-row a:hover {
+    background: var(--link-color);
+    color: #fff;
+}
+
+.skills ul, .projects ul {
+    list-style: none;
+    padding: 0;
+}
+.skills li, .projects li {
+    margin: 8px 0;
+    padding: 8px 12px;
+    border-radius: 6px;
+    background: var(--button-background-color);
+    font-size: 1.05em;
+}
+
+.education, .experience, .projects {
+    margin-top: 2.5em;
+}
+
+.exp-item {
+    margin-bottom: 1.5em;
+    background: var(--button-background-color);
+    border-radius: 8px;
+    padding: 1em 1.2em;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+.exp-location {
+    color: var(--link-color);
+    font-size: 0.95em;
+    margin-left: 0.5em;
+}
+
+.projects a {
+    color: var(--link-color);
+    text-decoration: underline;
+    margin-left: 0.5em;
+}
+.projects a:hover {
+    color: #fff;
+    background: var(--link-color);
+    border-radius: 4px;
+    padding: 0 4px;
+}
+
+@media (max-width: 600px) {
+    .about-page {
+        padding: 1rem 0.2rem;
+    }
+    .exp-item, .skills li, .projects li {
+        padding: 0.7em 0.5em;
+    }
+    .contact-row {
+        flex-direction: column;
+        gap: 0.7em;
+    }
+}

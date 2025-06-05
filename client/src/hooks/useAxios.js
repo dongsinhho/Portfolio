@@ -8,7 +8,7 @@ const useAxios = () => {
     const [accessToken, setAccessToken] = data.token
 
     const config = {
-        baseURL: process.env.API_URL ?? process.env.REACT_APP_API_URL,
+        baseURL: "http://127.0.0.1:4000", //process.env.API_URL ?? process.env.REACT_APP_API_URL,
         withCredentials: true,
         headers: {
             "Content-Type": "application/json"
@@ -56,7 +56,7 @@ const useAxios = () => {
                     return axios(config);
                 }
             }
-            return Promise.reject(errorResponse);
+            return errorResponse.response;
         }
     );
 

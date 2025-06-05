@@ -18,6 +18,7 @@ const Projects = lazy(() => import('./components/pages/projects-page.component')
 const WritePage = lazy(() => import('./components/pages/write-page.component'))
 const Login = lazy(() => import('./components/pages/login-page.component'))
 const Admin = lazy(() => import('./components/pages/admin-page.component'))
+const Register = lazy(() => import('./components/pages/register-page.component'))
 
 
 function App() {
@@ -29,7 +30,7 @@ function App() {
           <Routes>
             <Route path={routes.home.path} Component={Homepage} />
             <Route path={routes.blog.path} Component={Blogs} />
-            <Route path={`${routes.blog.path}/:blogId`} Component={Blog} />
+            <Route path={`${routes.blog.path}/:slug`} Component={Blog} />
             <Route path={routes.about.path} Component={About} />
             <Route path={routes.projects.path} Component={Projects} />
             <Route element={<PrivateRoute />}>
@@ -38,6 +39,7 @@ function App() {
               <Route path={`${routes.write.path}/:blogId`} Component={WritePage} />
             </Route>
             <Route path={routes.login.path} Component={Login} />
+            <Route path={routes.register.path} Component={Register} />
             <Route path='*' Component={NotFound} />
           </Routes>
         </Suspense>

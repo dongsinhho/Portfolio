@@ -12,6 +12,17 @@ const Projects = () => {
                     <div className="project-item" key={index}>
                         <h3>{project.title}</h3>
                         <p>{project.description}</p>
+                        {project.media && project.media.length > 0 && (
+                            <div className="project-media">
+                                {project.media.map((m, i) => (
+                                    m.type === 'image' ? (
+                                        <img key={i} src={m.src} alt={project.title + ' demo'} style={{maxWidth:'100%',marginBottom:'8px'}} />
+                                    ) : m.type === 'video' ? (
+                                        <video key={i} src={m.src} controls style={{maxWidth:'100%',marginBottom:'8px'}} />
+                                    ) : null
+                                ))}
+                            </div>
+                        )}
                         <a href={project.link} target="_blank" rel="noopener noreferrer">View Project</a>
                     </div>
                 ))}

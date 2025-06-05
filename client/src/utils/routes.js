@@ -26,6 +26,10 @@ let routes = {
     write: {
         path: "/write",
         display: "Write Blog"
+    },
+    register: {
+        path: "/register",
+        display: "Register"
     }
 }
 

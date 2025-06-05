@@ -17,21 +17,26 @@ const Homepage = () => {
     return (
         <div className="container">
             <div className="overview">
-                <p>Hello I'm Hồ Ngọc Đông Sinh a.k.a Dong Sinh Ho 🚀</p>
-                <p>
-                This page doesn’t have much on it, folks. I’ve only done a little bit to flex some skills for the HR folks (or maybe not…).
-                    <br />
-                    <h4>A Little About Me</h4>
-                    Basically, I’m a back-end developer, so showcasing my skills in a flashy way is a bit out of my wheelhouse. But hey, here’s a rough and tumble website anyway. It might be ugly and messy, but it gets the job done.
-                    <br />
-                    <h4>What You’ll Find Here</h4>
-                    <li>Technical Blogs: I post some technical blogs where I share knowledge picked up from the vast internet. If you find any mistakes, please bear with me. {"))"} </li>
-                    <li>Random Musings: Occasionally, I might drop some thoughts or ideas that pop into my head.</li>
-                    If you can view it, great. If not, then buzz off.
-                    <br/>
-                    <h4>Get in Touch</h4>
-                    If you have any feedback or want to get in touch, head over to the <Link className='about-text' to={routes.about.path}>About Me</Link> page --{">>>>>>"}
-                </p>
+                <p className="intro-main">Hello I'm Hồ Ngọc Đông Sinh a.k.a Dong Sinh Ho 🚀</p>
+                <div>
+                    <p className="intro-desc" style={{ fontSize: '1rem', color: '#666', fontWeight: 400 }}>
+                        This page doesn’t have much on it, folks. I’ve only done a little bit to flex some skills for the HR folks (or maybe not…).
+                    </p>
+                    <h4 className="intro-section">A Little About Me</h4>
+                    <p className="intro-text">
+                        Basically, I’m a back-end developer, so showcasing my skills in a flashy way is a bit out of my wheelhouse. But hey, here’s a rough and tumble website anyway. It might be ugly and messy, but it gets the job done.
+                    </p>
+                    <h4 className="intro-section">What You’ll Find Here</h4>
+                    <ul className="intro-list">
+                        <li><b>Technical Blogs:</b> I post some technical blogs where I share knowledge picked up from the vast internet. If you find any mistakes, please bear with me. ))</li>
+                        <li><b>Random Musings:</b> Occasionally, I might drop some thoughts or ideas that pop into my head.</li>
+                    </ul>
+                    <p className="intro-text">If you can view it, great. If not, then buzz off.</p>
+                    <h4 className="intro-section">Get in Touch</h4>
+                    <p className="intro-text">
+                        If you have any feedback or want to get in touch, head over to the <Link className='about-text' to={routes.about.path}>About Me</Link> page --{'>>>>>>'}
+                    </p>
+                </div>
                 <div className='social'>
                     <div className='social-button'>
                         {/* TODO: Change this to SVG */}

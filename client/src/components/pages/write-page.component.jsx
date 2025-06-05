@@ -7,8 +7,11 @@ import '../../styles/pages-style/write-page.component.css'
 import 'ckeditor5/ckeditor5.css';
 import editorConfig from '../../utils/ckEditorConfig';
 import { CreateBlog, GetAllCategory, GetBlogById, UpdateBlog } from '../../api/BlogApi';
+import { CreateCategory } from '../../api/CategoryApi';
 import useAxios from '../../hooks/useAxios';
 import { useNavigate, useParams } from 'react-router-dom';
+import CreateCategoryPopup from '../molecules/CreateCategoryPopup';
+import '../../styles/molecules-style/create-category-popup.css';
 
 const WritePage = (props) => {
     const axios = useAxios();
@@ -20,6 +23,7 @@ const WritePage = (props) => {
     const [selectedCategory, setSelectedCategory] = useState([]);
     const [categoryList, setCategoryList] = useState([]);
     const [editorInstance, setEditorInstance ] = useState(null);
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
 
     useEffect(() => {
     
@@ -99,6 +103,32 @@ const WritePage = (props) => {
         setSelectedCategory(newCategoryList)
     }
 
+    const handleCreateCategory = async (newCategoryName) => {
+        // Check if category already exists (client)
+        if (categoryList.some(cat => cat.name.toLowerCase() === newCategoryName.toLowerCase())) {
+            alert('Category already exists!');
+            return;
+        }
+        try {
+            // Gọi API tạo category, lấy id thực từ backend
+            const res = await CreateCategory(axios, newCategoryName);
+            // Nếu backend trả về category mới tạo, lấy id và name
+            // Nếu chỉ trả về message, cần reload lại categoryList
+            if (res.data && res.data.id && res.data.name) {
+                setCategoryList([...categoryList, res.data]);
+                setSelectedCategory([...selectedCategory, res.data.name]);
+            } else {
+                // fallback: reload toàn bộ categoryList
+                const allCate = await GetAllCategory(axios);
+                setCategoryList([{ id: '', name: '--' }, ...allCate.data]);
+                setSelectedCategory([...selectedCategory, newCategoryName]);
+            }
+            setIsPopupOpen(false);
+        } catch (err) {
+            alert('Tạo category thất bại!');
+        }
+    };
+
     const createPost = async () => {
         if (!formData.title) {
             alert("missing title")
@@ -121,7 +151,7 @@ const WritePage = (props) => {
         selectedCategory.forEach(element => {
             const cate = categoryList.find(obj => {
                 return obj.name === element
-              })
+            })
             categories.push(cate.id);
         });
         try {
@@ -135,10 +165,15 @@ const WritePage = (props) => {
                     title: "",
                     description: ""
                 });
-                navigate(`/blog/${blogId}`)
+                // Điều hướng về trang chi tiết blog theo slug nếu có
+                if (result.data && result.data.slug) {
+                    navigate(`/blog/${result.data.slug}`);
+                } else {
+                    navigate(`/blog`);
+                }
             }
             else {
-                var result = await CreateBlog(axios, formData.title, formData.description, formData.content, categories);
+                result = await CreateBlog(axios, formData.title, formData.description, formData.content, categories);
                 alert(result.message)
                 editorInstance.setData('');
                 setSelectedCategory([])
@@ -147,7 +182,12 @@ const WritePage = (props) => {
                     title: "",
                     description: ""
                 });
-                navigate(`/blog/${result.data}`)
+                // Điều hướng về trang chi tiết blog theo slug nếu có
+                if (result.data && result.data.slug) {
+                    navigate(`/blog/${result.data.slug}`);
+                } else {
+                    navigate(`/blog`);
+                }
             }
         }
         catch (err) {
@@ -191,7 +231,7 @@ const WritePage = (props) => {
                                 ))}
                             </select>
                             {/* create popup to create new category */}
-                            <button>+</button>
+                            <button onClick={() => setIsPopupOpen(true)}>+</button>
                         </div>
                         <div className='selected-category'>
                             {selectedCategory.map((item, index) => {
@@ -220,7 +260,12 @@ const WritePage = (props) => {
                 </div>
                 <button id='post-button' onClick={createPost}>Post</button>
             </div>
-
+            {isPopupOpen && (
+                <CreateCategoryPopup
+                    onClose={() => setIsPopupOpen(false)}
+                    onCreate={handleCreateCategory}
+                />
+            )}
         </div>
     )
 }

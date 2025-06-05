@@ -13,7 +13,7 @@ const BlogTitle = props => {
             <p className='blog-title-name'>{blog.title}</p>
             <div className='blog-list-tag'>
                 {blog.categories.map((tag, index) => (
-                    <Tag name={tag.name} referrer key={index} />
+                    <Tag name={tag.name} link={tag.link || '/blog'} referrer key={index} />
                 ))}
             </div>
             <div className='blog-title-time'>

@@ -10,4 +10,5 @@ public interface IBlogServices
     Task<Guid> CreateAsync(CreateBlogRequest request);
     Task UpdateAsync(Guid id, UpdateBlogRequest request);
     Task DeleteAsync(Guid id);
+    Task<Blog?> GetBySlugAsync(string slug);
 }

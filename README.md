@@ -47,12 +47,16 @@ To run this project locally, follow these steps:
     }
 
     ```
-3. Start API:
+3. Migrate DB
+    ```bash
+    dotnet ef database update
+    ```
+4. Start API:
     ```bash
     cd Portfolio/server
     dotnet run
     ```
-4. Start React App
+5. Start React App
     ```bash
     cd Portfolio/client
     npm start

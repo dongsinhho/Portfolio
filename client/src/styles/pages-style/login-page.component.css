@@ -87,3 +87,33 @@
 .inputButtonEnable p {
     color: white;
 }
+
+/* Register page custom styles (reuse login styles, but you can override here if needed) */
+
+.register-link {
+    color: var(--link-color);
+    text-decoration: underline;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+/* Example: highlight register button differently (optional) */
+.inputButton.register {
+    background-color: #e0f7fa;
+    border: 1px solid #00bcd4;
+}
+
+.inputButton.register .inputButtonEnable {
+    color: #00bcd4;
+}
+
+/* Responsive tweaks for register page */
+@media (max-width: 500px) {
+    .inputBox {
+        width: 90vw;
+        min-width: 0;
+    }
+    .inputButton, .inputButton.register {
+        width: 90vw;
+    }
+}

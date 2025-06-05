@@ -18,6 +18,10 @@ const Admin = () => {
     const getBlogData = async () => {
         try {
             const res = await GetAllBlogs(axios);
+            if (!res || !res.data || res.data.length === 0) {
+                setBlogList(blogs_data);
+                return;
+            }
             setBlogList(res.data);
         }
         catch (err) {

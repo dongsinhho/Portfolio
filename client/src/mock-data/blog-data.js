@@ -1,6 +1,7 @@
 const blogs_data = [
     {
         id: 0,
+        slug: 'my-first-blog',
         title: 'My first blog',
         description: 'This is my first blog',
         link: 'http://example.com/blog-one',
@@ -16,6 +17,7 @@ const blogs_data = [
     },
     {
         id: 1,
+        slug: 'tiktok-crawler',
         title: 'Tiktok Crawler',
         description: 'How I built a tiktok crawler application by C#, NodeJs',
         link: 'http://example.com/blog-one',
@@ -39,6 +41,7 @@ const blogs_data = [
     },
     {
         id: 2,
+        slug: 'wfp-in-windows-part-1',
         title: 'WFP in Windows - Part 1',
         description: 'Sharing my little knowlegde about how windows protect it own system operation',
         createdAt: new Date(),
@@ -60,6 +63,7 @@ const blogs_data = [
     },
     {
         id: 3,
+        slug: 'wfp-in-windows-part-2',
         title: 'WFP in Windows - Part 2',
         description: 'Sharing my little knowlegde about how windows protect it own system operation',
         createdAt: new Date(),
@@ -81,6 +85,7 @@ const blogs_data = [
     },
     {
         id: 4,
+        slug: 'wfp-in-windows-part-3',
         title: 'WFP in Windows - Part 3',
         description: 'Sharing my little knowlegde about how windows protect it own system operation',
         createdAt: new Date(),
@@ -102,6 +107,7 @@ const blogs_data = [
     },
     {
         id: 5,
+        slug: 'captive-portal',
         title: 'Captive Portal',
         description: 'What is captive portal and how it works',
         createdAt: new Date(),
@@ -123,6 +129,7 @@ const blogs_data = [
     },
     {
         id: 6,
+        slug: 'develop-windows-application',
         title: 'Develop Windows Application',
         description: 'WMI - Event Viewer - Logging - Registry Editor - Credential Manager - and more...',
         createdAt: new Date(),
@@ -144,6 +151,7 @@ const blogs_data = [
     },
     {
         id: 7,
+        slug: 'back-end-knowledge',
         title: 'Back-end Knowledge',
         description: 'Python, NodeJs, road to C#',
         createdAt: new Date(),
