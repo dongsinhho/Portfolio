@@ -6,8 +6,10 @@ import '../../styles/atoms-style/tag.css'
 
 const Tag = (props) => {
     const { name, link } = props;
+    // Nếu không có link, fallback về '/blog'
+    const safeLink = link || '/blog';
     return (
-        <Link className='tag' to={link}>
+        <Link className='tag' to={safeLink}>
             <span>
                 #{name}
             </span>

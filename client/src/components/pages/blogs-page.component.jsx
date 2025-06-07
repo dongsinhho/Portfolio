@@ -14,6 +14,10 @@ const Blogs = () => {
         const getCategories = async () => {
             try {
                 const res = await GetAllBlogs(axios);
+                if (!res || !res.data || res.data.length === 0) {
+                    setBlogList(blogs_data);
+                    return;
+                }
                 setBlogList(res.data);
             }
             catch (err) {
@@ -36,7 +40,7 @@ const Blogs = () => {
                             <div className="blog-item" key={index}>
                                 <h3>{blog.title}</h3>
                                 <p>{blog.description}</p>
-                                <LinkRef text='Read More' link={`${blog.id}`} referrer />
+                                <LinkRef text='Read More' link={`${blog.slug}`} referrer />
                             </div>
                         ))}
                     </div>

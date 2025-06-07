@@ -1,24 +1,25 @@
-export const CreateBlog = async (axios, title, desc, content, category) => {
+export const CreateBlog = async (axios, title, desc, content, category, slug) => {
   // Validate data
   const req = JSON.stringify({
     title: title,
     description: desc,
     content: content,
-    categories: category
+    categories: category,
+    slug: slug
   });
   const res = await axios.post("/api/blog", req)
   return res.data
 }
 
-export const UpdateBlog = async (axios, id, title, desc, content, category) => {
+export const UpdateBlog = async (axios, id, title, desc, content, category, slug) => {
   // Validate data
   const req = JSON.stringify({
     title: title,
     description: desc,
     content: content,
-    categories: category
+    categories: category,
+    slug: slug
   });
-  console.log(req)
   const res = await axios.put(`/api/blog/${id}`, req)
   return res.data
 }
@@ -30,7 +31,7 @@ export const GetAllBlogs = async (axios) => {
 
 export const GetBlogById = async (axios, id) => {
   const res = await axios.get(`/api/blog/${id}`)
-  return res.data
+  return res
 }
 
 export const DeleteBlogById = async (axios, id) => {
@@ -41,5 +42,10 @@ export const DeleteBlogById = async (axios, id) => {
 export const GetAllCategory = async (axios) => {
   const res = await axios.get("/api/category")
   return res.data
+}
+
+export const GetBlogBySlug = async (axios, slug) => {
+  const res = await axios.get(`/api/blog/slug/${slug}`)
+  return res;
 }
 

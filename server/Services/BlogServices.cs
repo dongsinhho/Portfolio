@@ -27,8 +27,22 @@ public class BlogServices : IBlogServices
             var blog = _mapper.Map<Blog>(request);
             blog.CreatedAt = DateTime.UtcNow;
             blog.Categories = await _context.Categories
-            .Where(c => request.Categories.Contains(c.Id))
-            .ToListAsync();
+                .Where(c => request.Categories.Contains(c.Id))
+                .ToListAsync();
+
+            // Sinh slug nếu chưa có
+            if (string.IsNullOrWhiteSpace(blog.Slug))
+            {
+                blog.Slug = GenerateSlug(blog.Title);
+            }
+            // Đảm bảo slug là unique
+            var baseSlug = blog.Slug;
+            int i = 1;
+            while (await _context.Blogs.AnyAsync(b => b.Slug == blog.Slug))
+            {
+                blog.Slug = $"{baseSlug}-{i}";
+                i++;
+            }
 
             _context.Blogs.Add(blog);
             await _context.SaveChangesAsync();
@@ -39,6 +53,19 @@ public class BlogServices : IBlogServices
             _logger.LogError(ex, "An error occurred while creating new Blog");
             throw new Exception("An error occurred while creating new Blog");
         }
+    }
+
+    private static string GenerateSlug(string title)
+    {
+        if (string.IsNullOrWhiteSpace(title)) return "blog";
+        var slug = title.ToLowerInvariant()
+            .Normalize(System.Text.NormalizationForm.FormD)
+            .Replace("\u0300-\u036f", "")
+            .Replace("[^a-z0-9]+", "-")
+            .Trim('-');
+        slug = System.Text.RegularExpressions.Regex.Replace(slug, "[^a-z0-9-]", "");
+        slug = System.Text.RegularExpressions.Regex.Replace(slug, "-+", "-");
+        return slug;
     }
 
     public async Task DeleteAsync(Guid id)
@@ -79,6 +106,13 @@ public class BlogServices : IBlogServices
         return blog;
     }
 
+    public async Task<Blog?> GetBySlugAsync(string slug)
+    {
+        var blog = await _context.Blogs.Include(bc => bc.Categories)
+            .FirstOrDefaultAsync(b => b.Slug == slug);
+        return blog;
+    }
+
     public async Task UpdateAsync(Guid id, UpdateBlogRequest request)
     {
         try
@@ -105,12 +139,15 @@ public class BlogServices : IBlogServices
             _context.Blogs.Update(blog);
             await _context.SaveChangesAsync();
 
-            foreach (var categoryId in request.Categories)
+            if (request.Categories != null)
             {
-                var category = await _context.Categories.FindAsync(categoryId);
-                if (category != null)
+                foreach (var categoryId in request.Categories)
                 {
-                    blog.Categories.Add(category);
+                    var category = await _context.Categories.FindAsync(categoryId);
+                    if (category != null)
+                    {
+                        blog.Categories.Add(category);
+                    }
                 }
             }
             _context.Blogs.Update(blog);

@@ -12,12 +12,14 @@ public class AutoMapperProfile : Profile
             .ForMember(dest => dest.Id, opt => opt.Ignore())
             .ForMember(dest => dest.CreatedAt, option => option.Ignore())
             .ForMember(dest => dest.UpdatedAt, option => option.Ignore())
-            .ForMember(dest => dest.Categories, option => option.Ignore());
+            .ForMember(dest => dest.Categories, option => option.Ignore())
+            .ForMember(dest => dest.Slug, option => option.MapFrom(src => src.Slug));
 
         CreateMap<UpdateBlogRequest, Blog>()
             .ForMember(dest => dest.Id, opt => opt.Ignore())
             .ForMember(dest => dest.CreatedAt, option => option.Ignore())
-            .ForMember(dest => dest.UpdatedAt, option => option.Ignore());
+            .ForMember(dest => dest.UpdatedAt, option => option.Ignore())
+            .ForMember(dest => dest.Slug, option => option.MapFrom(src => src.Slug));
 
         CreateMap<CreateCategoryRequest, Category>();
 
