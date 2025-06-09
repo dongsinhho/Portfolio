@@ -28,30 +28,30 @@ const Login = () => {
             setEmailError('')
             setPasswordError('')
 
-            // // Check if the user has entered both fields correctly
-            // if ('' === email) {
-            //     setEmailError('Please enter your email')
-            //     setButtonDisable(false)
-            //     return
-            // }
+            // Check if the user has entered both fields correctly
+            if ('' === email) {
+                setEmailError('Please enter your email')
+                setButtonDisable(false)
+                return
+            }
 
-            // if (!/^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
-            //     setEmailError('Please enter a valid email')
-            //     setButtonDisable(false)
-            //     return
-            // }
+            if (!/^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
+                setEmailError('Please enter a valid email')
+                setButtonDisable(false)
+                return
+            }
 
-            // if ('' === password) {
-            //     setPasswordError('Please enter a password')
-            //     setButtonDisable(false)
-            //     return
-            // }
+            if ('' === password) {
+                setPasswordError('Please enter a password')
+                setButtonDisable(false)
+                return
+            }
 
-            // if (password.length <= 7) {
-            //     setPasswordError('The password must be 8 characters or longer')
-            //     setButtonDisable(false)
-            //     return
-            // }
+            if (password.length <= 7) {
+                setPasswordError('The password must be 8 characters or longer')
+                setButtonDisable(false)
+                return
+            }
             var result = await HandleLogin(axios, email, password);
             console.log(`result: ${JSON.stringify(result)}`)
             setAccessToken(result.accessToken)
