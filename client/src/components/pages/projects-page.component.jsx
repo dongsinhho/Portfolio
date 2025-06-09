@@ -1,5 +1,7 @@
+import React from 'react'
 import '../../styles/pages-style/projects-page.component.css'
 import projects_data from '../../mock-data/projects-data'
+import LinkRef from '../atoms/link-ref'
 
 const Projects = () => {
     return (
@@ -23,7 +25,19 @@ const Projects = () => {
                                 ))}
                             </div>
                         )}
-                        <a href={project.link} target="_blank" rel="noopener noreferrer">View Project</a>
+                        {/* Render all project links if available, else fallback to old link */}
+                        {project.links && project.links.length > 0 ? (
+                            <div className="project-links">
+                                {project.links.map((l, idx) => (
+                                    <React.Fragment key={idx}>
+                                        {idx > 0 && <span className="project-link-sep">|</span>}
+                                        <LinkRef text={l.label} link={l.url} target="_blank" rel="noopener noreferrer" className="project-link-btn" />
+                                    </React.Fragment>
+                                ))}
+                            </div>
+                        ) : project.links ? (
+                            <LinkRef text="View Project" link={project.link} target="_blank" rel="noopener noreferrer" className="project-link-btn" />
+                        ) : null}
                     </div>
                 ))}
             </div>
